@@ -2,12 +2,13 @@ import {
   LOGIN_PENDING,
   LOGIN_SUCCESS,
   LOGIN_FAILED,
-  // LOGOUT,
+  LOGOUT,
   // CLEAR_AUTH_ERROR,
 } from '../constants/index';
 
 const initialState = {
   token: '',
+  userId: '',
   nickname: '',
   profileImage: '',
   isAuthenticated: false,
@@ -27,6 +28,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         token: action.token,
+        userId: action.userId,
         nickname: action.nickname,
         profileImage: action.profileImage,
         loading: false,
@@ -39,6 +41,18 @@ const authReducer = (state = initialState, action) => {
         loading: false,
         isAuthenticated: false,
         error: action.error
+      };
+
+    case LOGOUT:
+      return {
+        ...state,
+        token: '',
+        userId: '',
+        nickname: '',
+        profileImage: '',
+        isAuthenticated: false,
+        loading: false,
+        error: null
       };
 
     default:

@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-// import { Switch, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -11,16 +10,23 @@ import history from '../lib/history';
 const Kakao = window.Kakao;
 
 const AuthContainer = ({
-  nickname,
-  profileImage,
+  userId,
   isAuthenticated,
-  loading,
-  error,
+  // loading,
+  // error,
   requestLogin
 }) => {
   useEffect(() => {
-    Kakao.init(process.env.REACT_APP_KAKAO_KEY);
+    if (!Kakao.isInitialized()) {
+      Kakao.init(process.env.REACT_APP_KAKAO_KEY);
+    }
   }, []);
+
+  useEffect(() => {
+    isAuthenticated && history.push(`/users/${userId}/travel`);
+
+    // eslint-disable-next-line
+  }, [ isAuthenticated ]);
 
   const onLoginButtonClick = () => {
     Kakao.Auth.login({
@@ -35,22 +41,25 @@ const AuthContainer = ({
     });
   };
 
-  return (
-    <Login onLoginButtonClick={onLoginButtonClick} />
-  )
+  return <Login onLoginButtonClick={onLoginButtonClick} />;
 };
 
 const mapStateToProps = state => ({
-  nickname: state.auth.nickname,
-  profileImage: state.auth.profileImage,
+  userId: state.auth.userId,
   isAuthenticated: state.auth.isAuthenticated,
-  loading: state.auth.loading,
-  error: state.auth.error
+  // loading: state.auth.loading,
+  // error: state.auth.error
 });
 
 const mapDispatchToProps = dispatch => ({
   requestLogin: requestLogin(dispatch)
 });
+
+AuthContainer.propTypes = {
+  userId: PropTypes.string.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+  requestLogin: PropTypes.func.isRequired
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthContainer);
 

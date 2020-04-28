@@ -3,9 +3,11 @@ import {
   LOGIN_PENDING,
   LOGIN_SUCCESS,
   LOGIN_FAILED,
-  // LOGOUT,
+  LOGOUT,
   // CLEAR_AUTH_ERROR
 } from '../constants/index';
+
+import history from '../lib/history';
 import setTokenToHeader from '../lib/auth';
 
 export const requestLogin = dispatch => async userInfo => {
@@ -13,12 +15,23 @@ export const requestLogin = dispatch => async userInfo => {
     dispatch({ type: LOGIN_PENDING });
 
     const response = await axios.post(`${process.env.REACT_APP_SERVER_URI}/auth/login`, userInfo);
-    const { token, nickname, profile_image: profileImage } = response.data;
+    const { userId, token, nickname, profile_image: profileImage } = response.data;
 
     setTokenToHeader(token);
 
-    dispatch({ type: LOGIN_SUCCESS, token, nickname, profileImage });
+    dispatch({ type: LOGIN_SUCCESS, userId, token, nickname, profileImage });
   } catch (err) {
     dispatch({ type: LOGIN_FAILED, error: err.response.data.errorMessage });
   }
 };
+
+export const logout = dispatch => () => {
+  localStorage.removeItem('token');
+  history.push('/');
+
+  dispatch({ type: LOGOUT });
+};
+
+// export const clearError = dispatch => () => {
+//   dispatch({ type: CLEAR_AUTH_ERROR });
+// };

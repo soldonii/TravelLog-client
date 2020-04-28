@@ -4,14 +4,18 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import GlobalStyle from '../components/layout/GlobalStyle';
+import ProtectedRoute from '../components/routes/ProtectedRoute';
+
 import AuthContainer from './Auth.container';
-// import ProtectedRoute from '../components/routes/ProtectedRoute';
+import TravelContainer from './Travel.container';
 
 import setTokenToHeader from '../lib/auth';
 import history from '../lib/history';
 
-
-const AppContainer = ({ isAuthenticated }) => {
+const AppContainer = ({
+  isAuthenticated,
+  userId
+}) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     token && setTokenToHeader(token);
@@ -23,6 +27,11 @@ const AppContainer = ({ isAuthenticated }) => {
       <Router history={history}>
         <Switch>
           <Route exact path='/' component={AuthContainer} />
+          <ProtectedRoute
+            path={`/users/${userId}/travel`}
+            component={TravelContainer}
+            isAuthenticated={isAuthenticated}
+          />
         </Switch>
       </Router>
     </Fragment>
@@ -30,11 +39,13 @@ const AppContainer = ({ isAuthenticated }) => {
 };
 
 AppContainer.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired
+  isAuthenticated: PropTypes.bool.isRequired,
+  userId: PropTypes.string
 };
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  userId: state.auth.userId
 });
 
 export default connect(mapStateToProps, null)(AppContainer);
