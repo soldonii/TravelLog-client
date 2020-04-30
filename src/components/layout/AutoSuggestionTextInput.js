@@ -3,42 +3,42 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const AutoSuggestionTextInput = ({
-  label,
-  itemList,
+  title,
+  placeholder,
+  name,
   inputValue,
-  autoSuggestionList,
   onInputChange,
-  onSuggestionClick
+  suggestionList,
+  onSuggestionClick,
 }) => (
-  <Wrapper>
-    <p>{label}</p>
+  <AutoSuggestionWrapper>
+    <p>{title}</p>
     <InputContainer>
       <input
         type='text'
-        name='country'
-        id='country'
-        placeholder='국가를 입력하세요.'
-        onChange={e => onInputChange(e, itemList)}
+        placeholder={placeholder}
+        name={name}
+        onChange={e => onInputChange(e)}
         value={inputValue}
       />
       <div className='list-container'>
         <ul>
-          {autoSuggestionList.map(({ name }) => (
-            <li key={name} onClick={() => onSuggestionClick(name)} >{name}</li>
+          {suggestionList.map((item, idx) => (
+            <li key={idx} onClick={() => onSuggestionClick(item)}>{item}</li>
           ))}
         </ul>
       </div>
     </InputContainer>
-  </Wrapper>
+  </AutoSuggestionWrapper>
 );
 
-const Wrapper = styled.div`
+const AutoSuggestionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 40rem;
-  margin-bottom: 2rem;
+  width: 40%;
+  margin: 2rem;
 
   p {
     font-size: 1.5rem;
@@ -49,18 +49,20 @@ const Wrapper = styled.div`
 `;
 
 const InputContainer = styled.div`
-  border: 1px solid white;
   position: relative;
+  width: 100%;
 
   input {
-    width: 40rem;
-    padding: 0.5rem;
+    width: 100%;
+    padding: 1rem;
     font-size: 1.5rem;
+    border-radius: 0.5rem;
+    border: none;
   }
 
   .list-container {
-    max-height: 15rem;
-    width: 40rem;
+    max-height: 18.5rem;
+    width: 100%;
     overflow: scroll;
     overflow-x: hidden;
     position: absolute;
@@ -92,7 +94,7 @@ const InputContainer = styled.div`
 `;
 
 AutoSuggestionTextInput.propTypes = {
-  label: PropTypes.string,
+  title: PropTypes.string,
   itemList: PropTypes.array,
   inputValue: PropTypes.string,
   autoSuggestionList: PropTypes.array,

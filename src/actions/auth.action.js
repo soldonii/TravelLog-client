@@ -8,7 +8,6 @@ import {
 } from '../constants/index';
 
 import history from '../lib/history';
-import setTokenToHeader from '../lib/auth';
 
 export const requestLogin = dispatch => async userInfo => {
   try {
@@ -17,7 +16,7 @@ export const requestLogin = dispatch => async userInfo => {
     const response = await axios.post(`${process.env.REACT_APP_SERVER_URI}/auth/login`, userInfo);
     const { userId, token, nickname, profile_image: profileImage } = response.data;
 
-    setTokenToHeader(token);
+    localStorage.setItem('token', token);
 
     dispatch({ type: LOGIN_SUCCESS, userId, token, nickname, profileImage });
   } catch (err) {

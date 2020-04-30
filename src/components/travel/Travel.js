@@ -2,18 +2,25 @@ import React from 'react';
 import styled from 'styled-components';
 
 import AutoSuggestionTextInput from '../layout/AutoSuggestionTextInput';
+import DatePicker from '../layout/DatePicker';
+import Button from '../layout/Button';
 
 import coverImg from '../../assets/images/coverImg.png';
 
-// 전체 페이지 컴포넌트 만들고
-// 달력, 날짜 등 하는 컴포넌트 따로 만들어서 import하기
 const Travel = ({
-  countryList,
   country,
+  onCountryInputChange,
   countrySuggestions,
-  onInputChange,
-  onSuggestionClick,
-  // travelDates
+  onCountrySuggestionClick,
+  city,
+  onCityInputChange,
+  citySuggestions,
+  onCitySuggestionClick,
+  travelDates,
+  onDatesChange,
+  onSubmit,
+  loading,
+  error
 }) => {
   return (
     <Wrapper>
@@ -21,16 +28,34 @@ const Travel = ({
       <h3>원하는 여행지와 날짜를 선택하세요.</h3>
       <Form>
         <AutoSuggestionTextInput
-          label='✈️ 여행지'
-          itemList={countryList}
+          title='✈️ 나라 선택'
+          placeholder='나라를 입력하세요.'
+          name='country'
+          onInputChange={onCountryInputChange}
           inputValue={country}
-          autoSuggestionList={countrySuggestions}
-          onInputChange={onInputChange}
-          onSuggestionClick={onSuggestionClick}
+          suggestionList={countrySuggestions}
+          onSuggestionClick={onCountrySuggestionClick}
         />
+        <AutoSuggestionTextInput
+          title='🚕 도시 선택'
+          placeholder='도시를 선택하세요.'
+          name='city'
+          onInputChange={onCityInputChange}
+          inputValue={city}
+          suggestionList={citySuggestions}
+          onSuggestionClick={onCitySuggestionClick}
+        />
+        <DatePicker
+          title='🗓 여행날짜'
+          inputDates={travelDates}
+          onDatesChange={onDatesChange}
+        />
+        <div className='button-container'>
+          <Button onClick={e => onSubmit(e, country, city, travelDates)}>검색</Button>
+        </div>
       </Form>
     </Wrapper>
-  )
+  );
 };
 
 const Wrapper = styled.section`
@@ -60,12 +85,19 @@ const Wrapper = styled.section`
 const Form = styled.form`
   height: 100%;
   width: 100%;
-  background-color: #02122c;
+  background-color: rgba(2, 18, 44, 0.7);
   border-radius: 1rem;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   padding: 2rem;
+  position: relative;
+
+  .button-container {
+    position: absolute;
+    right: 2rem;
+    bottom: 2rem;
+  }
 `;
 
 export default Travel;

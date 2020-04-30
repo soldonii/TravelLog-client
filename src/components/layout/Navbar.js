@@ -32,7 +32,7 @@ const NavWrapper = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 5vw;
+  padding: 0 9.5vw;
   box-shadow: 0px 1px 10px #999;
   position: relative;
 

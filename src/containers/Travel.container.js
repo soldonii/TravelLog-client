@@ -4,34 +4,87 @@ import { connect } from 'react-redux';
 
 import Navbar from '../components/layout/Navbar';
 import Travel from '../components/travel/Travel';
+
 import { logout } from '../actions/auth.action';
+import { requestCrawling } from '../actions/travel.action';
 
-import countryList from '../lib/countryList.json';
+import countryList from '../lib/cityCode.json';
 import logo from '../assets/images/logo.png';
-
 
 const TravelContainer = ({
   isAuthenticated,
-  logout
+  loading,
+  error,
+  logout,
+  requestCrawling
 }) => {
   const [ country, setCountry ] = useState('');
   const [ countrySuggestions, setCountrySuggestions ] = useState([]);
-  const [ travelDates, setTravelDates ] = useState('');
+  const [ city, setCity ] = useState('');
+  const [ targetCities, setTargetCities ] = useState([]);
+  const [ citySuggestions, setCitySuggestions ] = useState([]);
+  const [ travelDates, setTravelDates ] = useState([
+    new Date(), new Date(new Date().setDate(new Date().getDate() + 1))
+  ]);
 
-  const onInputChange = (e, itemList) => {
-    const userInput = e.target.value;
-    setCountry(userInput);
+  const onCountryInputChange = e => {
+    setCountry(e.target.value);
 
-    userInput.length ?
-      setCountrySuggestions(itemList.filter(({ name }) => {
-        return name.toLowerCase().includes(userInput.toLowerCase())
-      }).sort()) :
+    const country = e.target.value.toLowerCase();
+    const tempCountryList = [];
+
+    if (country.length) {
+      countryList.forEach(({ Name }) => {
+        Name.toLowerCase().includes(country) && tempCountryList.push(Name);
+      });
+
+      setCountrySuggestions(tempCountryList.sort());
+    } else {
+      setCity('');
       setCountrySuggestions([]);
+      setCitySuggestions([]);
+    }
   };
 
-  const onSuggestionClick = countryName => {
+  const onCityInputChange = e => {
+    setCity(e.target.value);
+
+    const city = e.target.value.toLowerCase();
+    const cities = [ ...targetCities ];
+    const tempCityList = [];
+
+    if (city.length) {
+      cities.forEach(cityName => {
+        cityName.toLowerCase().includes(city) && tempCityList.push(cityName);
+      });
+
+      setCitySuggestions(tempCityList.sort());
+    } else {
+      setCitySuggestions(targetCities);
+    }
+  };
+
+  const onCountrySuggestionClick = countryName => {
     setCountry(countryName);
+    setCity('');
     setCountrySuggestions([]);
+
+    for (const country of countryList) {
+      if (country.Name === countryName) {
+        setTargetCities(country.Cities.map(city => city.Name));
+        setCitySuggestions(country.Cities.map(city => city.Name));
+      }
+    }
+  };
+
+  const onCitySuggestionClick = cityName => {
+    setCity(cityName);
+    setCitySuggestions([]);
+  };
+
+  const onSubmit = (e, country, city, travelDates) => {
+    e.preventDefault();
+    requestCrawling(country, city, travelDates);
   };
 
   return (
@@ -40,23 +93,33 @@ const TravelContainer = ({
         <button onClick={logout}>Logout</button>
       </Navbar>
       <Travel
-        countryList={countryList}
         country={country}
+        onCountryInputChange={onCountryInputChange}
         countrySuggestions={countrySuggestions}
-        onInputChange={onInputChange}
-        onSuggestionClick={onSuggestionClick}
+        onCountrySuggestionClick={onCountrySuggestionClick}
+        city={city}
+        onCityInputChange={onCityInputChange}
+        citySuggestions={citySuggestions}
+        onCitySuggestionClick={onCitySuggestionClick}
         travelDates={travelDates}
+        onDatesChange={setTravelDates}
+        onSubmit={onSubmit}
+        loading={loading}
+        error={error}
       />
     </Fragment>
   );
 };
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  loading: state.travel.loading,
+  error: state.travel.error
 });
 
 const mapDispatchToProps = dispatch => ({
-  logout: logout(dispatch)
+  logout: logout(dispatch),
+  requestCrawling: requestCrawling(dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TravelContainer);
