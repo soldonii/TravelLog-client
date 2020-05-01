@@ -2,6 +2,8 @@ import React, { useState, Fragment } from 'react';
 import styled from 'styled-components'
 // import PropTypes from 'prop-types';
 
+import * as colors from '../../lib/colors';
+
 const Dropdown = ({
   style,
   buttonName,
@@ -11,7 +13,9 @@ const Dropdown = ({
 
   return (
     <Fragment>
-      <p onClick={() => setVisibility(!visibility)} style={{ textAlign: 'center' }}>{buttonName}</p>
+      <p onClick={() => setVisibility(!visibility)} style={{ textAlign: 'center', fontSize: '12px' }}>
+        {buttonName}
+      </p>
       <Container style={{
         ...style,
         visibility: visibility ? 'visible' : 'hidden',
@@ -69,7 +73,7 @@ const Container = styled.div`
       }
 
       &:hover, &:active {
-        color: red;
+        color: ${colors.HIGHLIGHT_COLOR};
       }
 
       .dropdown-price {

@@ -1,22 +1,25 @@
 import { createGlobalStyle } from 'styled-components';
 import * as colors from '../../lib/colors';
 
+import NanumSquareRegular from '../../assets/font/NanumSquareRegular.ttf';
+
 const GlobalStyle = createGlobalStyle`
   @font-face {
-    font-family: 'AppleSDGothicNeoM';
-    src: url('../../assets/font/AppleSDGothicNeoM.ttf');
+    font-family: 'NanumSquareRegular';
+    src: local('NanumSquareRegular'),
+         url(${NanumSquareRegular}) format('ttf');
   }
 
   html, body {
     padding: 0;
     margin: 0;
     font-size: 10px;
+    font-family: 'NanumSquareRegular', sans-serif;
   }
 
   body {
     min-height: 100vh;
     color: black;
-    font-family: 'AppleSDGothicNeoM', sans-serif;
   }
 
   * {
