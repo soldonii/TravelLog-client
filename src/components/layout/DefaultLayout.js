@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const DefaultLayout = ({ children, img }) => (
-  <Wrapper backgroundImg={img}>
+const DefaultLayout = ({ children, img, style }) => (
+  <Wrapper backgroundImg={img} style={style}>
     {children}
   </Wrapper>
 );

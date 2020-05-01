@@ -1,13 +1,15 @@
 import {
   CRAWLING_START,
-  // CRAWLING_SUCCESS,
+  CRAWLING_SUCCESS,
   // CRAWLING_FAILED,
   // CRAWLING_ERROR,
 } from '../constants/index';
 
 const initialState = {
   loading: false,
-  error: null
+  error: null,
+  kayakData: [],
+  airbnbData: []
   // token: '',
   // userId: '',
   // nickname: '',
@@ -23,6 +25,14 @@ const travelReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true
+      };
+
+    case CRAWLING_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        kayakData: action.kayak,
+        airbnbData: action.airbnb
       };
 
     default:

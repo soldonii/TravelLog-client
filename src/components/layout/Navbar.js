@@ -34,7 +34,7 @@ const NavWrapper = styled.nav`
   align-items: center;
   padding: 0 9.5vw;
   box-shadow: 0px 1px 10px #999;
-  position: relative;
+  position: absolute;
 
   img {
     height: 8vh;

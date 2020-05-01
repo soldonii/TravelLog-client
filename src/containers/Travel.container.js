@@ -4,17 +4,20 @@ import { connect } from 'react-redux';
 
 import Navbar from '../components/layout/Navbar';
 import Travel from '../components/travel/Travel';
+import Booking from '../components/travel/Booking';
 
 import { logout } from '../actions/auth.action';
 import { requestCrawling } from '../actions/travel.action';
 
-import countryList from '../lib/cityCode.json';
+import countryList from '../lib/countryList.json';
 import logo from '../assets/images/logo.png';
 
 const TravelContainer = ({
   isAuthenticated,
   loading,
   error,
+  kayakData,
+  airbnbData,
   logout,
   requestCrawling
 }) => {
@@ -92,21 +95,27 @@ const TravelContainer = ({
       <Navbar isAuthenticated={isAuthenticated} logo={logo}>
         <button onClick={logout}>Logout</button>
       </Navbar>
-      <Travel
-        country={country}
-        onCountryInputChange={onCountryInputChange}
-        countrySuggestions={countrySuggestions}
-        onCountrySuggestionClick={onCountrySuggestionClick}
-        city={city}
-        onCityInputChange={onCityInputChange}
-        citySuggestions={citySuggestions}
-        onCitySuggestionClick={onCitySuggestionClick}
-        travelDates={travelDates}
-        onDatesChange={setTravelDates}
-        onSubmit={onSubmit}
-        loading={loading}
-        error={error}
-      />
+      {kayakData.length && airbnbData.length ?
+        <Booking
+          flights={kayakData}
+          accommodations={airbnbData}
+        /> :
+        <Travel
+          country={country}
+          onCountryInputChange={onCountryInputChange}
+          countrySuggestions={countrySuggestions}
+          onCountrySuggestionClick={onCountrySuggestionClick}
+          city={city}
+          onCityInputChange={onCityInputChange}
+          citySuggestions={citySuggestions}
+          onCitySuggestionClick={onCitySuggestionClick}
+          travelDates={travelDates}
+          onDatesChange={setTravelDates}
+          onSubmit={onSubmit}
+          loading={loading}
+          error={error}
+        />
+      }
     </Fragment>
   );
 };
@@ -114,7 +123,9 @@ const TravelContainer = ({
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   loading: state.travel.loading,
-  error: state.travel.error
+  error: state.travel.error,
+  kayakData: state.travel.kayakData,
+  airbnbData: state.travel.airbnbData
 });
 
 const mapDispatchToProps = dispatch => ({

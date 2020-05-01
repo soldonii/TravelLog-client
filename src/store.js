@@ -11,7 +11,8 @@ const middleware = applyMiddleware(thunk);
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['auth']
+  // whitelist: ['auth']
+  whitelist: ['auth', 'travel']
 };
 
 const enhancedReducer = persistReducer(persistConfig, rootReducer);

@@ -20,7 +20,10 @@ export const requestCrawling = dispatch => async (country, city, travelDates) =>
       travelDates
     });
 
-    dispatch({ type: CRAWLING_SUCCESS });
+    const [ kayak, airbnb ] = response.data;
+    // console.log(response.data);
+
+    dispatch({ type: CRAWLING_SUCCESS, kayak, airbnb });
   } catch (err) {
     dispatch({ type: CRAWLING_FAILED, error: err.response.data.errorMessage });
   }

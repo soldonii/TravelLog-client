@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import DefaultLayout from '../layout/DefaultLayout';
+import Loading from './Loading';
 import AutoSuggestionTextInput from '../layout/AutoSuggestionTextInput';
 import DatePicker from '../layout/DatePicker';
 import Button from '../layout/Button';
@@ -23,38 +25,42 @@ const Travel = ({
   error
 }) => {
   return (
-    <Wrapper>
-      <h1>어디로 떠나볼까요?</h1>
-      <h3>원하는 여행지와 날짜를 선택하세요.</h3>
-      <Form>
-        <AutoSuggestionTextInput
-          title='✈️ 나라 선택'
-          placeholder='나라를 입력하세요.'
-          name='country'
-          onInputChange={onCountryInputChange}
-          inputValue={country}
-          suggestionList={countrySuggestions}
-          onSuggestionClick={onCountrySuggestionClick}
-        />
-        <AutoSuggestionTextInput
-          title='🚕 도시 선택'
-          placeholder='도시를 선택하세요.'
-          name='city'
-          onInputChange={onCityInputChange}
-          inputValue={city}
-          suggestionList={citySuggestions}
-          onSuggestionClick={onCitySuggestionClick}
-        />
-        <DatePicker
-          title='🗓 여행날짜'
-          inputDates={travelDates}
-          onDatesChange={onDatesChange}
-        />
-        <div className='button-container'>
-          <Button onClick={e => onSubmit(e, country, city, travelDates)}>검색</Button>
-        </div>
-      </Form>
-    </Wrapper>
+    loading ?
+    <Loading /> :
+    <DefaultLayout>
+      <Wrapper>
+        <h1>어디로 떠나볼까요?</h1>
+        <h3>원하는 여행지와 날짜를 선택하세요.</h3>
+        <Form>
+          <AutoSuggestionTextInput
+            title='✈️ 나라 선택'
+            placeholder='나라를 입력하세요.'
+            name='country'
+            onInputChange={onCountryInputChange}
+            inputValue={country}
+            suggestionList={countrySuggestions}
+            onSuggestionClick={onCountrySuggestionClick}
+          />
+          <AutoSuggestionTextInput
+            title='🚕 도시 선택'
+            placeholder='도시를 선택하세요.'
+            name='city'
+            onInputChange={onCityInputChange}
+            inputValue={city}
+            suggestionList={citySuggestions}
+            onSuggestionClick={onCitySuggestionClick}
+          />
+          <DatePicker
+            title='🗓 여행날짜'
+            inputDates={travelDates}
+            onDatesChange={onDatesChange}
+          />
+          <div className='button-container'>
+            <Button onClick={e => onSubmit(e, country, city, travelDates)}>검색</Button>
+          </div>
+        </Form>
+      </Wrapper>
+    </DefaultLayout>
   );
 };
 
