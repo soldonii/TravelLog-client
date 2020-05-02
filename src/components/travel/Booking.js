@@ -6,12 +6,14 @@ import Accomodations from './Accomodations';
 
 const Booking = ({
   flights,
-  accommodations
+  accommodations,
+  onFlightLinkClick,
+  onAccomodationLinkClick
 }) => {
   return (
     <DefaultLayout>
-      <Flights items={flights} />
-      <Accomodations items={accommodations} />
+      <Flights items={flights} onFlightLinkClick={onFlightLinkClick} />
+      <Accomodations items={accommodations} onAccomodationLinkClick={onAccomodationLinkClick} />
     </DefaultLayout>
   );
 };

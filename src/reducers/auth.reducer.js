@@ -2,8 +2,7 @@ import {
   LOGIN_PENDING,
   LOGIN_SUCCESS,
   LOGIN_FAILED,
-  LOGOUT,
-  // CLEAR_AUTH_ERROR,
+  LOGOUT
 } from '../constants/index';
 
 const initialState = {

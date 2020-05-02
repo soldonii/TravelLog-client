@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import DefaultLayout from '../layout/DefaultLayout';
-import airplaneLoading from '../../assets/images/airplaneLoading.gif';
 
-const Loading = () => {
+const Loading = ({ message, loadingImg }) => {
   const [ timer, setTimer ] = useState(1);
 
   useEffect(() => {
@@ -19,8 +18,8 @@ const Loading = () => {
   return (
     <DefaultLayout>
       <Wrapper>
-        <img src={airplaneLoading} alt='loading' />
-        <h1>항공권과 숙박 정보를 조회 중입니다{'.'.repeat(timer)}</h1>
+        <img src={loadingImg} alt='loading' />
+        <h1>{message}{'.'.repeat(timer)}</h1>
       </Wrapper>
     </DefaultLayout>
   );

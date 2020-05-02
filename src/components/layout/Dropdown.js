@@ -1,13 +1,16 @@
 import React, { useState, Fragment } from 'react';
 import styled from 'styled-components'
 // import PropTypes from 'prop-types';
+import Scrollable from './Scrollable';
 
 import * as colors from '../../lib/colors';
 
 const Dropdown = ({
   style,
   buttonName,
-  items
+  currentItem,
+  dropDownOptions,
+  onItemClick
 }) => {
   const [ visibility, setVisibility ] = useState(false);
 
@@ -21,14 +24,22 @@ const Dropdown = ({
         visibility: visibility ? 'visible' : 'hidden',
         opacity: visibility ? 1 : 0 }
       }>
-        {items.map((item, idx) => (
-          <div key={idx} className='dropdown-item'>
-            <a href={item.link} className='link' target='_blank' rel="noopener noreferrer">
-              <span className='dropdown-price'>{item.price}</span>
-              <span className='dropdown-provider'>{item.provider}</span>
-            </a>
-          </div>
-        ))}
+        <Scrollable>
+          {dropDownOptions.map((option, idx) => (
+            <div key={idx} className='dropdown-item'>
+              <a
+                href={option.link}
+                className='link'
+                target='_blank'
+                rel="noopener noreferrer"
+                onClick={() => onItemClick(currentItem, option)}
+              >
+                <span className='dropdown-price'>{option.price}</span>
+                <span className='dropdown-provider'>{option.provider}</span>
+              </a>
+            </div>
+          ))}
+        </Scrollable>
       </Container>
     </Fragment>
   );
@@ -36,7 +47,7 @@ const Dropdown = ({
 
 Dropdown.defaultProps = {
   style: {
-    minHeight: '50px',
+    maxHeight: '150px',
     minWidth: '50px',
     width: '200px'
   }

@@ -12,9 +12,9 @@ const Kakao = window.Kakao;
 const AuthContainer = ({
   userId,
   isAuthenticated,
-  // loading,
-  // error,
-  requestLogin
+  loading,
+  error,
+  requestLogin,
 }) => {
   useEffect(() => {
     if (!Kakao.isInitialized()) {
@@ -27,6 +27,12 @@ const AuthContainer = ({
 
     // eslint-disable-next-line
   }, [ isAuthenticated ]);
+
+  useEffect(() => {
+    if (error) {
+      window.alert('로그인 중 에러가 발생했습니다. 잠시 후 다시 시도해주세요.');
+    }
+  }, [ error ]);
 
   const onLoginButtonClick = () => {
     Kakao.Auth.login({
@@ -41,14 +47,14 @@ const AuthContainer = ({
     });
   };
 
-  return <Login onLoginButtonClick={onLoginButtonClick} />;
+  return <Login loading={loading} onLoginButtonClick={onLoginButtonClick} />;
 };
 
 const mapStateToProps = state => ({
   userId: state.auth.userId,
   isAuthenticated: state.auth.isAuthenticated,
-  // loading: state.auth.loading,
-  // error: state.auth.error
+  loading: state.auth.loading,
+  error: state.auth.error
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -58,105 +64,9 @@ const mapDispatchToProps = dispatch => ({
 AuthContainer.propTypes = {
   userId: PropTypes.string.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.string,
   requestLogin: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthContainer);
-
-
-
-
-// import DefaultLayout from '../components/layout/DefaultLayout';
-// import Signup from '../components/auth/Signup';
-// import Login from '../components/auth/Login';
-// import Navbar from '../components/layout/Navbar';
-// import logo from '../assets/logo.png';
-
-// import history from '../lib/history';
-// import { requestSignup, requestLogin, clearError, logout } from '../actions/auth.actions';
-
-// const AuthContainer = ({
-//   userId,
-//   hasSignedUp,
-//   isAuthenticated,
-//   error,
-//   loading,
-//   requestSignup,
-//   requestLogin,
-//   logout,
-//   clearError
-// }) => {
-//   useEffect(() => {
-//     hasSignedUp && history.push('/auth/login');
-
-//     let errorTimeout;
-//     if (error) {
-//       errorTimeout = window.setTimeout(() => clearError(), 2000);
-//     }
-
-//     return () => clearTimeout(errorTimeout);
-//     // eslint-disable-next-line
-//   }, [ hasSignedUp, error ]);
-
-//   useEffect(() => {
-//     isAuthenticated && history.push(`/users/${userId}/favorites`);
-
-//     // eslint-disable-next-line
-//   }, [ userId, isAuthenticated ]);
-
-//   return (
-//     <Fragment>
-//       <Navbar logo={logo}>
-//         <Link to='/auth/signup'>Sign Up</Link>
-//         {isAuthenticated ? <button onClick={logout}>Logout</button> : <Link to='/auth/login'>Login</Link>}
-//       </Navbar>
-//       <DefaultLayout>
-//         <Switch>
-//           <Route exact path='/auth/signup'>
-//             <Signup
-//               error={error}
-//               loading={loading}
-//               requestSignup={requestSignup}
-//             />
-//           </Route>
-//           <Route exact path='/auth/login'>
-//             <Login
-//               error={error}
-//               loading={loading}
-//               requestLogin={requestLogin}
-//             />
-//           </Route>
-//         </Switch>
-//       </DefaultLayout>
-//     </Fragment>
-//   );
-// };
-
-// const mapStateToProps = state => ({
-//   userId: state.auth.userId,
-//   hasSignedUp: state.auth.hasSignedUp,
-//   isAuthenticated: state.auth.isAuthenticated,
-//   error: state.auth.error,
-//   loading: state.auth.loading
-// });
-
-// const mapDispatchToProps = dispatch => ({
-//   requestSignup: requestSignup(dispatch),
-//   requestLogin: requestLogin(dispatch),
-//   logout: logout(dispatch),
-//   clearError: clearError(dispatch)
-// });
-
-// AuthContainer.propTypes = {
-//   userId: PropTypes.string.isRequired,
-//   hasSignedUp: PropTypes.bool.isRequired,
-//   isAuthenticated: PropTypes.bool.isRequired,
-//   error: PropTypes.string,
-//   loading: PropTypes.bool.isRequired,
-//   requestSignup: PropTypes.func.isRequired,
-//   requestLogin: PropTypes.func.isRequired,
-//   logout: PropTypes.func.isRequired,
-//   clearError: PropTypes.func.isRequired
-// };
-
-// export default connect(mapStateToProps, mapDispatchToProps)(AuthContainer);
