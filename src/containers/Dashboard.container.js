@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import Navbar from '../components/layout/Navbar';
@@ -9,12 +9,24 @@ import SlideModal from '../components/dashboard/SlideModal';
 import logo from '../assets/images/logo.png';
 
 import { logout } from '../actions/auth.action';
+import { getInitialData } from '../actions/dashboard.actions';
 
 const DashboardContainer = ({
   isAuthenticated,
+  travelId,
+  travelCountry,
+  spendingByDates,
+
+  getInitialData,
   logout
 }) => {
   const [ shouldModalOpen, setShouldModalOpen ] = useState(true);
+
+  useEffect(() => {
+    getInitialData(travelId);
+
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <Fragment>
@@ -33,11 +45,17 @@ const DashboardContainer = ({
 };
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  travelId: state.travel.travelId,
+  travelCountry: state.dashboard.travelCountry,
+  spendingByDates: state.dashboard.spendingByDates,
+  loading: state.dashboard.loading,
+  error: state.dashboard.error
 });
 
 const mapDispatchToProps = dispatch => ({
-  logout: logout(dispatch)
+  logout: logout(dispatch),
+  getInitialData: getInitialData(dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainer);

@@ -10,7 +10,7 @@ import {
   DESELECT_FLIGHT_TICKET,
   SELECT_ACCOMODATION,
   DESELECT_ACCOMODATION,
-  SAVE_FLIGHT_AND_ACCOMODATION
+  SAVE_TRAVEL_ID
 } from '../constants/index';
 
 import { setTokenToHeader, getDayList } from '../lib/index';
@@ -68,19 +68,6 @@ export const deselectAccomodation = dispatch => () => {
   dispatch({ type: DESELECT_ACCOMODATION });
 };
 
-export const saveFlightAndAccomodation = dispatch => (flight, accomodation) => {
-  console.log('flight', flight);
-  console.log('accomodation', accomodation);
-
-  // const 
-
-  const { priceAndProviderWithLinks } = flight;
-  const { price: flightPrice } = priceAndProviderWithLinks[0];
-  const { price: accomodationPrice } = accomodation;
-
-  dispatch({
-    type: SAVE_FLIGHT_AND_ACCOMODATION,
-    flightPrice: parseInt(flightPrice.slice(0, -1).replace(',', '')),
-    accomodationPrice: parseInt(accomodationPrice.replace(',', ''))
-  });
+export const saveTravelId = dispatch => travelId => {
+  dispatch({ type: SAVE_TRAVEL_ID, travelId });
 };

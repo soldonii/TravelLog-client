@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 // import PropTypes from 'prop-types';
 
 import Navbar from '../components/layout/Navbar';
@@ -11,6 +12,7 @@ import Button from '../components/layout/Button';
 import history from '../lib/history';
 
 import { logout } from '../actions/auth.action';
+import { setTokenToHeader } from '../lib/index';
 import {
   requestCrawling,
   addFlightToStack,
@@ -19,7 +21,7 @@ import {
   deselectFlightTicket,
   selectAccomodation,
   deselectAccomodation,
-  saveFlightAndAccomodation
+  saveTravelId
 } from '../actions/travel.action';
 
 import countryList from '../lib/countryList.json';
@@ -36,8 +38,8 @@ const TravelContainer = ({
   accomodationStack,
   boughtFlight,
   boughtAccomodation,
-  flightPrice,
-  accomodationPrice,
+  travelCountry,
+  travelDayList,
   logout,
   requestCrawling,
   addFlightToStack,
@@ -46,7 +48,7 @@ const TravelContainer = ({
   deselectFlightTicket,
   selectAccomodation,
   deselectAccomodation,
-  saveFlightAndAccomodation
+  saveTravelId
 }) => {
   const [ country, setCountry ] = useState('');
   const [ countrySuggestions, setCountrySuggestions ] = useState([]);
@@ -57,14 +59,6 @@ const TravelContainer = ({
     new Date(), new Date(new Date().setDate(new Date().getDate() + 1))
   ]);
   const [ shouldModalOpen, setShouldModalOpen ] = useState(false);
-
-  useEffect(() => {
-    if (flightPrice > 0 && accomodationPrice > 0) {
-      history.push(`/users/${userId}/travel/dashboard`);
-    }
-
-    // eslint-disable-next-line
-  }, [ flightPrice, accomodationPrice ] );
 
   const onCountryInputChange = e => {
     setCountry(e.target.value);
@@ -166,18 +160,37 @@ const TravelContainer = ({
     }
   };
 
-  const onModalButtonClick = () => {
+  const onModalButtonClick = async () => {
     if (!Object.keys(boughtFlight).length || !Object.keys(boughtAccomodation).length ) {
       window.alert('항공편, 숙소 각각 한 개씩 구매를 확정해야 합니다.');
     } else {
-      saveFlightAndAccomodation(boughtFlight, boughtAccomodation);
+      const token = localStorage.getItem('token');
+      setTokenToHeader(token);
+
+      const { priceAndProviderWithLinks } = boughtFlight;
+      const { price: flightPrice } = priceAndProviderWithLinks[0];
+      const { price: accomodationPrice } = boughtAccomodation;
+
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_URI}/travel/dashboard`, {
+        flightPrice: parseInt(flightPrice.slice(0, -1).replace(/,/gi, '')),
+        accomodationPrice: parseInt(accomodationPrice.replace(/,/gi, '')),
+        travelCountry,
+        travelDayList
+      });
+
+      const { travelId } = response.data;
+
+      saveTravelId(travelId);
+
+      if (response.status === 200) history.push(`/users/${userId}/travel/dashboard`);
     }
   };
 
   return (
     <Fragment>
       <Navbar isAuthenticated={isAuthenticated} logo={logo}>
-        <Button onClick={() => setShouldModalOpen(true)}>다음</Button>
+        {kayakData.length && airbnbData.length ?
+          <Button onClick={() => setShouldModalOpen(true)}>다음</Button> : null}
         <Button onClick={logout}>로그아웃</Button>
       </Navbar>
       <SlideInModal
@@ -228,7 +241,9 @@ const mapStateToProps = state => ({
   boughtFlight: state.travel.boughtFlight,
   boughtAccomodation: state.travel.boughtAccomodation,
   flightPrice: state.travel.flightPrice,
-  accomodationPrice: state.travel.accomodationPrice
+  accomodationPrice: state.travel.accomodationPrice,
+  travelCountry: state.travel.travelCountry,
+  travelDayList: state.travel.travelDayList
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -240,7 +255,7 @@ const mapDispatchToProps = dispatch => ({
   deselectFlightTicket: deselectFlightTicket(dispatch),
   selectAccomodation: selectAccomodation(dispatch),
   deselectAccomodation: deselectAccomodation(dispatch),
-  saveFlightAndAccomodation: saveFlightAndAccomodation(dispatch)
+  saveTravelId: saveTravelId(dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TravelContainer);

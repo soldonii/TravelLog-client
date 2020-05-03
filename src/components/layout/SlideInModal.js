@@ -23,7 +23,7 @@ const SlideInModal = ({
           style={{ position: 'absolute', right: '2rem', top: '2rem' }}
           onClick={onModalButtonClick}
         >
-          저장
+          확정
         </Button>
         <ModalContent>
           <h1>관심 항공권</h1>

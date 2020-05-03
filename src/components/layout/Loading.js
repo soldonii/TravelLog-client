@@ -3,7 +3,10 @@ import styled from 'styled-components';
 
 import DefaultLayout from '../layout/DefaultLayout';
 
-const Loading = ({ message, loadingImg }) => {
+const Loading = ({
+  message,
+  loadingImg
+}) => {
   const [ timer, setTimer ] = useState(1);
 
   useEffect(() => {

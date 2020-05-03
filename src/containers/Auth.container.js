@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 import Login from '../components/auth/Login';
 
 import { requestLogin } from '../actions/auth.action';
-import history from '../lib/history';
 
 const Kakao = window.Kakao;
 
 const AuthContainer = ({
+  history,
   userId,
   isAuthenticated,
   loading,
@@ -62,6 +62,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 AuthContainer.propTypes = {
+  history: PropTypes.object.isRequired,
   userId: PropTypes.string.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,

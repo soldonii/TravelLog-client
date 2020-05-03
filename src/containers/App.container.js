@@ -39,14 +39,14 @@ const AppContainer = ({
   </Fragment>
 );
 
-AppContainer.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
-  userId: PropTypes.string
-};
-
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   userId: state.auth.userId
 });
+
+AppContainer.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  userId: PropTypes.string
+};
 
 export default connect(mapStateToProps, null)(AppContainer);

@@ -20,7 +20,7 @@ const Dashboard = () => {
         <GoogleMaps />
       </SC.Dashboard.Wrapper>
     </DefaultLayout>
-  )
+  );
 };
 
 export default Dashboard;
