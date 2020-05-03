@@ -5,11 +5,6 @@ import PropTypes from 'prop-types';
 
 import * as colors from '../../lib/colors';
 
-/*
-로그인 한 상태면 => 로고 눌렀을 때 대시보드로 이동
-로그인 x => 로고 눌렀을 때 메인 화면으로 이동
-*/
-
 const Navbar = ({
   isAuthenticated,
   logo,
@@ -45,17 +40,11 @@ const LinkWrapper = styled.div`
   font-size: 1.5rem;
 
   button {
-    background-color: white;
     padding: 0.9rem 1.7rem;
     border: 0;
     border-radius: 2rem;
     cursor: pointer;
     font-size: 1.5rem;
-  }
-
-  button:hover {
-    color: black;
-    background-color: ${colors.HIGHLIGHT_COLOR};
   }
 
   a {

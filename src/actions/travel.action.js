@@ -13,7 +13,7 @@ import {
   SAVE_FLIGHT_AND_ACCOMODATION
 } from '../constants/index';
 
-import setTokenToHeader from '../lib/auth';
+import { setTokenToHeader, getDayList } from '../lib/index';
 
 export const requestCrawling = dispatch => async (country, city, travelDates) => {
   const token = localStorage.getItem('token');
@@ -31,7 +31,9 @@ export const requestCrawling = dispatch => async (country, city, travelDates) =>
     const [ kayak, airbnb ] = response.data;
     // console.log(response.data);
 
-    dispatch({ type: CRAWLING_SUCCESS, kayak, airbnb });
+    const travelDayList = getDayList(travelDates);
+
+    dispatch({ type: CRAWLING_SUCCESS, kayak, airbnb, country, travelDayList });
   } catch (err) {
     dispatch({ type: CRAWLING_FAILED, error: err.response.data.errorMessage });
   }
@@ -67,6 +69,11 @@ export const deselectAccomodation = dispatch => () => {
 };
 
 export const saveFlightAndAccomodation = dispatch => (flight, accomodation) => {
+  console.log('flight', flight);
+  console.log('accomodation', accomodation);
+
+  // const 
+
   const { priceAndProviderWithLinks } = flight;
   const { price: flightPrice } = priceAndProviderWithLinks[0];
   const { price: accomodationPrice } = accomodation;

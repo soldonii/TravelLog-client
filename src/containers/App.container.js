@@ -9,6 +9,7 @@ import PageNotFound from '../components/layout/PageNotFound';
 
 import AuthContainer from './Auth.container';
 import TravelContainer from './Travel.container';
+import DashboardContainer from './Dashboard.container';
 
 import history from '../lib/history';
 
@@ -22,8 +23,14 @@ const AppContainer = ({
       <Switch>
         <Route exact path='/' component={AuthContainer} />
         <ProtectedRoute
+          exact
           path={`/users/${userId}/travel`}
           component={TravelContainer}
+          isAuthenticated={isAuthenticated}
+        />
+        <ProtectedRoute
+          path={`/users/${userId}/travel/dashboard`}
+          component={DashboardContainer}
           isAuthenticated={isAuthenticated}
         />
         <Route path='*' component={PageNotFound} />

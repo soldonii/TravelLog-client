@@ -33,8 +33,8 @@ const Travel = ({
         <h3>원하는 여행지와 날짜를 선택하세요.</h3>
         <SC.Travel.Form>
           <AutoSuggestionTextInput
-            title='✈️ 나라 선택'
-            placeholder='나라를 입력하세요.'
+            title='✈️ 국가 선택'
+            placeholder='국가를 입력하세요.'
             name='country'
             onInputChange={onCountryInputChange}
             inputValue={country}

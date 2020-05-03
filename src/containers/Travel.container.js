@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 
@@ -6,6 +6,9 @@ import Navbar from '../components/layout/Navbar';
 import SlideInModal from '../components/layout/SlideInModal';
 import Travel from '../components/travel/Travel';
 import Booking from '../components/travel/Booking';
+import Button from '../components/layout/Button';
+
+import history from '../lib/history';
 
 import { logout } from '../actions/auth.action';
 import {
@@ -23,6 +26,7 @@ import countryList from '../lib/countryList.json';
 import logo from '../assets/images/logo.png';
 
 const TravelContainer = ({
+  userId,
   isAuthenticated,
   loading,
   error,
@@ -32,6 +36,8 @@ const TravelContainer = ({
   accomodationStack,
   boughtFlight,
   boughtAccomodation,
+  flightPrice,
+  accomodationPrice,
   logout,
   requestCrawling,
   addFlightToStack,
@@ -51,6 +57,14 @@ const TravelContainer = ({
     new Date(), new Date(new Date().setDate(new Date().getDate() + 1))
   ]);
   const [ shouldModalOpen, setShouldModalOpen ] = useState(false);
+
+  useEffect(() => {
+    if (flightPrice > 0 && accomodationPrice > 0) {
+      history.push(`/users/${userId}/travel/dashboard`);
+    }
+
+    // eslint-disable-next-line
+  }, [ flightPrice, accomodationPrice ] );
 
   const onCountryInputChange = e => {
     setCountry(e.target.value);
@@ -109,7 +123,11 @@ const TravelContainer = ({
 
   const onSubmit = (e, country, city, travelDates) => {
     e.preventDefault();
-    requestCrawling(country, city, travelDates);
+
+    if (!country) window.alert('여행 국가를 선택해주세요.');
+    else if (!city) window.alert('도시를 선택해주세요.');
+    else if (!travelDates.length) window.alert('날짜를 선택해주세요.');
+    else requestCrawling(country, city, travelDates);
   };
 
   const onFlightLinkClick = (flightInfo, selectedOption) => {
@@ -159,8 +177,8 @@ const TravelContainer = ({
   return (
     <Fragment>
       <Navbar isAuthenticated={isAuthenticated} logo={logo}>
-        <button onClick={() => setShouldModalOpen(true)}>다음</button>
-        <button onClick={logout}>로그아웃</button>
+        <Button onClick={() => setShouldModalOpen(true)}>다음</Button>
+        <Button onClick={logout}>로그아웃</Button>
       </Navbar>
       <SlideInModal
         shouldModalOpen={shouldModalOpen}
@@ -199,6 +217,7 @@ const TravelContainer = ({
 };
 
 const mapStateToProps = state => ({
+  userId: state.auth.userId,
   isAuthenticated: state.auth.isAuthenticated,
   loading: state.travel.loading,
   error: state.travel.error,
@@ -207,7 +226,9 @@ const mapStateToProps = state => ({
   flightStack: state.travel.flightStack,
   accomodationStack: state.travel.accomodationStack,
   boughtFlight: state.travel.boughtFlight,
-  boughtAccomodation: state.travel.boughtAccomodation
+  boughtAccomodation: state.travel.boughtAccomodation,
+  flightPrice: state.travel.flightPrice,
+  accomodationPrice: state.travel.accomodationPrice
 });
 
 const mapDispatchToProps = dispatch => ({

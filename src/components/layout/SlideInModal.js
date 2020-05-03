@@ -105,7 +105,6 @@ const ModalOverlay = styled.div`
 const ModalWrapper = styled.div`
   height: 100vh;
   width: 75vw;
-  background-color: lightgoldenrodyellow;
   position: fixed;
   top: 0;
   display: ${props => props.open ? 'block' : 'none'};
@@ -113,6 +112,7 @@ const ModalWrapper = styled.div`
   z-index: 1;
   transition: all 0.5s ease-in-out;
   display: flex;
+  background: white;
 `;
 
 const ModalContent = styled.div`

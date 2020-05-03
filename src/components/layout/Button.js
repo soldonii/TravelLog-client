@@ -9,10 +9,12 @@ const Button = styled.button`
   border: 0;
   border-radius: 2rem;
   cursor: pointer;
+  margin: 0 0.5rem;
 
   &:hover {
     background-color: ${colors.HIGHLIGHT_COLOR};
     transition: all 0.3s;
+    color: white;
   }
 `;
 

@@ -22,7 +22,9 @@ const initialState = {
   boughtFlight: {},
   boughtAccomodation: {},
   flightPrice: 0,
-  accomodationPrice: 0
+  accomodationPrice: 0,
+  country: '',
+  travelDayList: []
 };
 
 const travelReducer = (state = initialState, action) => {
@@ -38,7 +40,9 @@ const travelReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         kayakData: action.kayak,
-        airbnbData: action.airbnb
+        airbnbData: action.airbnb,
+        country: action.country,
+        travelDayList: action.travelDayList
       };
 
     case ADD_FLIGHT_TO_STACK:
