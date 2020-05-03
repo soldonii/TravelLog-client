@@ -1,41 +1,17 @@
-// https://blog.bitsrc.io/customizing-chart-js-in-react-2199fa81530a
-import React, { useEffect, createRef } from 'react';
-import Chart from 'chart.js';
+import React from 'react';
 
-import * as SC from './dashboard.styles';
+import icons from './categoryIcon';
 
-let chartRef = createRef();
-
-const Category = () => {
-  useEffect(() => {
-    const myChartRef = chartRef.current.getContext('2d');
-
-    new Chart(myChartRef, {
-      type: 'pie',
-      data: {
-        labels: [ '숙박', '항공', '교통', '관광', '식비', '쇼핑', '기타' ],
-        datasets: [
-            {
-              label: 'expenditure',
-              backgroundColor: ['rgb(255, 99, 132)', 'rgb(0, 0, 0)'],
-              borderColor: 'rgb(0, 99, 132)',
-              borderWidth: 2,
-              data: [799000, 1234184, 50239, 230000, 100000, 493333, 0],
-            }
-        ]
-      },
-      options: {
-        devicePixelRatio: 2
-      }
-    })
-  }, []);
-
-  return (
-    <SC.Category.Wrapper>
-      <SC.Category.Title>카테고리별 지출</SC.Category.Title>
-      <canvas id='mychart' ref={chartRef} width='400' height='300' />
-    </SC.Category.Wrapper>
-  );
-};
+const Category = ({
+  chosen,
+  onClick
+}) => (
+  Object.values(icons).map(({ icon, name }) => (
+    <div key={name} className='icon' onClick={() => onClick(name)}>
+      <img className={chosen === name ? 'active-icon' : ''} src={icon} alt='icon'/>
+      <p className={chosen === name ? 'active-name' : ''}>{name}</p>
+    </div>
+  ))
+);
 
 export default Category;

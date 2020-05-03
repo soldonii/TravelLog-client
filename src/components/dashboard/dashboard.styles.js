@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+import downarrow from '../../assets/images/downarrow.png';
+import * as colors from '../../lib/colors';
+
 export const Dashboard = {
   Wrapper: styled.section`
     height: 100vh;
@@ -12,7 +15,7 @@ export const Dashboard = {
   `
 };
 
-export const Category = {
+export const PieChart = {
   Wrapper: styled.div`
     display: flex;
     flex-direction: column;
@@ -24,3 +27,161 @@ export const Category = {
     margin-bottom: 3rem;
   `
 };
+
+export const Register = {
+  Wrapper: styled.form`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 5vh 3vw;
+
+    select {
+      width: 15rem;
+      padding: 0.5rem 1rem;
+      background: url(${downarrow}) no-repeat 95% 50%;
+      background-size: 1.5rem;
+      border: 1px solid black;
+      appearance: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+  `,
+  Header: styled.header`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 5vh;
+
+    h1 {
+      font-size: 4rem;
+      font-weight: bolder;
+    }
+  `,
+  Price: styled.div`
+    height: 10vh;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+
+    input {
+      height: 100%;
+      width: 30%;
+      font-size: 4rem;
+      background: transparent;
+      border: transparent;
+      text-align: center;
+      border-bottom: 1px solid lightgray;
+    }
+
+    input::-webkit-inner-spin-button {
+      opacity: 0;
+    }
+
+    h2 {
+      font-size: 3rem;
+      margin-right: 2rem;
+    }
+
+    h5 {
+      font-size: 2rem;
+    }
+
+    .converted-numbers {
+      color: ${colors.HIGHLIGHT_COLOR};
+      font-size: 3rem;
+    }
+
+    .currency-unit {
+      font-size: 1.5rem;
+    }
+  `,
+  Category: styled.div`
+    height: 13vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    .icon {
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .active-icon {
+      filter: grayscale(0);
+    }
+
+    .active-name {
+      color: ${colors.HIGHLIGHT_COLOR};
+      font-weight: bolder;
+    }
+
+    img {
+      width: 4rem;
+      height: 4rem;
+      filter: grayscale(1);
+    }
+
+    p {
+      margin-top: 0.5rem;
+      font-size: 1.4rem;
+    }
+  `,
+  Description: styled.div`
+    height: 7vh;
+    width: 100%;
+
+    input {
+      height: 100%;
+      width: 100%;
+      font-size: 2rem;
+      background: transparent;
+      border: transparent;
+      border-bottom: 1px solid lightgray;
+    }
+  `,
+  Map: styled.div`
+    border: 1px solid green;
+    height: 40vh;
+    width: 100%;
+  `
+};
+
+export const GeoSearch = {
+  Wrapper: styled.div`
+    width: 90%;
+    text-align: center;
+    margin: 0 auto;
+    position: relative;
+
+    input {
+      width: 100%;
+      font-size: 1.5rem;
+      height: 3rem;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid gray;
+      margin-top: 1rem;
+    }
+
+    .suggestion {
+      position: absolute;
+      z-index: 2;
+      font-size: 1.4rem;
+      cursor: pointer;
+      background-color: white;
+    }
+  `,
+  Suggestion: styled.div`
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+    font-size: 1.4rem;
+    cursor: pointer;
+    background-color: white;
+  `
+}

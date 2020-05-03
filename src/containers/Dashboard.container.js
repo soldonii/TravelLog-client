@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import Navbar from '../components/layout/Navbar';
 import Dashboard from '../components/dashboard/Dashboard';
 import Button from '../components/layout/Button';
-import SlideModal from '../components/dashboard/SlideModal';
+import SlideInModal from '../components/layout/SlideInModal';
+import Register from '../components/dashboard/Register';
 
 import logo from '../assets/images/logo.png';
 
@@ -16,6 +17,8 @@ const DashboardContainer = ({
   travelId,
   travelCountry,
   spendingByDates,
+  currencyExchange,
+  currencyCode,
 
   getInitialData,
   logout
@@ -35,10 +38,13 @@ const DashboardContainer = ({
         <Button onClick={() => setShouldModalOpen(true)}>지출 등록</Button>
         <Button onClick={logout}>로그아웃</Button>
       </Navbar>
-      <SlideModal
-        shouldModalOpen={shouldModalOpen}
-        setShouldModalOpen={setShouldModalOpen}
-      />
+      <SlideInModal shouldModalOpen={shouldModalOpen} setShouldModalOpen={setShouldModalOpen}>
+        <Register
+          spendingByDates={spendingByDates}
+          currencyExchange={currencyExchange}
+          currencyCode={currencyCode}
+        />
+      </SlideInModal>
       <Dashboard />
     </Fragment>
   );
@@ -49,6 +55,8 @@ const mapStateToProps = state => ({
   travelId: state.travel.travelId,
   travelCountry: state.dashboard.travelCountry,
   spendingByDates: state.dashboard.spendingByDates,
+  currencyExchange: state.dashboard.currencyExchange,
+  currencyCode: state.dashboard.currencyCode,
   loading: state.dashboard.loading,
   error: state.dashboard.error
 });

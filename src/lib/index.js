@@ -9,7 +9,6 @@ export const setTokenToHeader = token => {
 };
 
 const DAY = ['일', '월', '화', '수', '목', '금', '토'];
-// const dateArray = ['Tue May 19 2020 00:00:00 GMT+0900 (Korean Standard Time)', ' Wed May 27 2020 23:59:59 GMT+0900 (Korean Standard Time)'];
 
 const getDaysArray = dateArray => {
   const [ startDate, endDate ] = dateArray;
@@ -35,3 +34,5 @@ export const getDayList = dateArray => {
     return `${dateStr}(${day})`;
   });
 };
+
+export const numberWithCommas = number => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

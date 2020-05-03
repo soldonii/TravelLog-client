@@ -18,9 +18,9 @@ export const getInitialData = dispatch => async travelId => {
       params: { travelId }
     });
 
-    const { travelCountry, spendingByDates, currencyExchange } = response.data;
+    const { travelCountry, spendingByDates, currencyExchange, currencyCode } = response.data;
 
-    dispatch({ type: GET_INITIAL_DATA_SUCCESS, travelCountry, spendingByDates, currencyExchange });
+    dispatch({ type: GET_INITIAL_DATA_SUCCESS, travelCountry, spendingByDates, currencyExchange, currencyCode });
   } catch (err) {
     dispatch({ type: GET_INITIAL_DATA_FAILED, error: err.response.data.errorMessage });
   }

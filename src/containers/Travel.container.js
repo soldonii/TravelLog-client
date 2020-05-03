@@ -7,6 +7,7 @@ import Navbar from '../components/layout/Navbar';
 import SlideInModal from '../components/layout/SlideInModal';
 import Travel from '../components/travel/Travel';
 import Booking from '../components/travel/Booking';
+import PurchaseCandidates from '../components/travel/PurchaseCandidates';
 import Button from '../components/layout/Button';
 
 import history from '../lib/history';
@@ -193,15 +194,15 @@ const TravelContainer = ({
           <Button onClick={() => setShouldModalOpen(true)}>다음</Button> : null}
         <Button onClick={logout}>로그아웃</Button>
       </Navbar>
-      <SlideInModal
-        shouldModalOpen={shouldModalOpen}
-        setShouldModalOpen={setShouldModalOpen}
-        displayItem1={flightStack}
-        displayItem2={accomodationStack}
-        onItem1Click={onFlightClick}
-        onItem2Click={onAccomodationClick}
-        onModalButtonClick={onModalButtonClick}
-      />
+      <SlideInModal shouldModalOpen={shouldModalOpen} setShouldModalOpen={setShouldModalOpen}>
+        <PurchaseCandidates
+          flightStack={flightStack}
+          accomodationStack={accomodationStack}
+          onFlightClick={onFlightClick}
+          onAccomodationClick={onAccomodationClick}
+          onSubmit={onModalButtonClick}
+        />
+      </SlideInModal>
       {kayakData.length && airbnbData.length ?
         <Booking
           flights={kayakData}
