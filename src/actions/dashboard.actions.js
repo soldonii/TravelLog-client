@@ -8,7 +8,7 @@ import {
   REGISTER_SPENDING_FAILED
 } from '../constants/index';
 
-import { setTokenToHeader } from '../lib/index';
+import { setTokenToHeader, getDefaultLatLng } from '../lib/index';
 
 export const getInitialData = dispatch => async travelId => {
   const token = localStorage.getItem('token');
@@ -22,9 +22,16 @@ export const getInitialData = dispatch => async travelId => {
     });
 
     const { travelCountry, spendingByDates, currencyExchange, currencyCode } = response.data;
-    console.log('resp', response.data);
+    // 여기서 나라를 기준으로 coordinates 구하기
+    const defaultLatLng = getDefaultLatLng(travelCountry);
 
-    dispatch({ type: GET_INITIAL_DATA_SUCCESS, travelCountry, spendingByDates, currencyExchange, currencyCode });
+    dispatch({type: GET_INITIAL_DATA_SUCCESS,
+      travelCountry,
+      spendingByDates,
+      currencyExchange,
+      currencyCode,
+      defaultLatLng
+    });
   } catch (err) {
     dispatch({ type: GET_INITIAL_DATA_FAILED, error: err.response.data.errorMessage });
   }

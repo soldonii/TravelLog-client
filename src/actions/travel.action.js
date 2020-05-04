@@ -3,7 +3,7 @@ import {
   CRAWLING_START,
   CRAWLING_SUCCESS,
   CRAWLING_FAILED,
-  // CRAWLING_ERROR,
+  CLEAR_ERROR,
   ADD_FLIGHT_TO_STACK,
   ADD_ACCOMODATION_TO_STACK,
   SELECT_FLIGHT_TICKET,
@@ -37,6 +37,10 @@ export const requestCrawling = dispatch => async (country, city, travelDates) =>
   } catch (err) {
     dispatch({ type: CRAWLING_FAILED, error: err.response.data.errorMessage });
   }
+};
+
+export const clearError = dispatch => () => {
+  dispatch({ type: CLEAR_ERROR });
 };
 
 export const addFlightToStack = dispatch => (flightInfo, selectedOption) => {

@@ -19,6 +19,7 @@ const DashboardContainer = ({
   spendingByDates,
   currencyExchange,
   currencyCode,
+  defaultLatLng,
 
   getInitialData,
   registerSpending,
@@ -92,6 +93,7 @@ const DashboardContainer = ({
           registerSpending={registerSpending}
           chosenSpending={chosenSpending}
           setChosenSpending={setChosenSpending}
+          defaultLatLng={defaultLatLng}
         />
       </SlideInModal>
       <Dashboard
@@ -113,6 +115,7 @@ const mapStateToProps = state => ({
   spendingByDates: state.dashboard.spendingByDates,
   currencyExchange: state.dashboard.currencyExchange,
   currencyCode: state.dashboard.currencyCode,
+  defaultLatLng: state.dashboard.defaultLatLng,
   loading: state.dashboard.loading,
   error: state.dashboard.error,
 });

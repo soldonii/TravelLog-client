@@ -14,6 +14,7 @@ const initialState = {
   spendingByDates: {},
   currencyExchange: '',
   currencyCode: '',
+  defaultLatLng: {}
 };
 
 const dashboardReducer = (state = initialState, action) => {
@@ -32,7 +33,8 @@ const dashboardReducer = (state = initialState, action) => {
         travelCountry: action.travelCountry,
         spendingByDates: action.spendingByDates,
         currencyExchange: action.currencyExchange,
-        currencyCode: action.currencyCode
+        currencyCode: action.currencyCode,
+        defaultLatLng: action.defaultLatLng
       };
 
     case GET_INITIAL_DATA_FAILED:

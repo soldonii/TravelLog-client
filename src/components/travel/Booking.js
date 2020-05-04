@@ -7,9 +7,19 @@ import Accomodations from './Accomodations';
 const Booking = ({
   flights,
   accommodations,
-  onFlightLinkClick,
-  onAccomodationLinkClick
+  addFlightToStack,
+  addAccomodationToStack,
 }) => {
+  const onFlightLinkClick = (flightInfo, selectedOption) => {
+    addFlightToStack(flightInfo, selectedOption);
+    window.open(selectedOption.link, '_blank');
+  };
+
+  const onAccomodationLinkClick = (description, title, price, image, link) => {
+    addAccomodationToStack(description, title, price, image);
+    window.open(link, '_blank');
+  };
+
   return (
     <DefaultLayout>
       <Flights items={flights} onFlightLinkClick={onFlightLinkClick} />

@@ -1,8 +1,8 @@
 import {
   CRAWLING_START,
   CRAWLING_SUCCESS,
-  // CRAWLING_FAILED,
-  // CRAWLING_ERROR,
+  CRAWLING_FAILED,
+  CLEAR_ERROR,
   ADD_FLIGHT_TO_STACK,
   ADD_ACCOMODATION_TO_STACK,
   SELECT_FLIGHT_TICKET,
@@ -42,6 +42,19 @@ const travelReducer = (state = initialState, action) => {
         airbnbData: action.airbnb,
         travelCountry: action.country,
         travelDayList: action.travelDayList
+      };
+
+    case CRAWLING_FAILED:
+      return {
+        ...state,
+        loading: false,
+        error: action.error
+      };
+
+    case CLEAR_ERROR:
+      return {
+        ...state,
+        error: null
       };
 
     case ADD_FLIGHT_TO_STACK:

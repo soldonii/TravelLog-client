@@ -10,11 +10,6 @@ import GeoSearch from './GeoSearch';
 
 import * as SC from './dashboard.styles';
 
-const SEOUL_LATLNG = {
-  lat: 37.566536,
-  lng: 126.977966
-};
-
 const Register = ({
   shouldModalOpen,
   setShouldModalOpen,
@@ -25,21 +20,21 @@ const Register = ({
   currencyCode,
   registerSpending,
   chosenSpending,
-  setChosenSpending
+  setChosenSpending,
+  defaultLatLng
 }) => {
   const [ day, setDay ] = useState('출발 전');
   const [ spending, setSpending ] = useState('');
   const [ chosenCategory, setChosenCategory ] = useState('');
   const [ description, setDescription ] = useState('');
   const [ location, setLocation ] = useState('');
-  const [ coordinates, setCoordinates ] = useState({ lat: SEOUL_LATLNG.lat, lng: SEOUL_LATLNG.lng });
+  const [ coordinates, setCoordinates ] = useState(defaultLatLng);
   const [ spendingId, setSpendingId ] = useState('');
 
   useEffect(() => {
     if (chosenSpending.category) {
       let { day, amount, category, description, location: { title, coordinates }, spendingId } = chosenSpending;
 
-      if (!coordinates) coordinates = ({ lat: SEOUL_LATLNG.lat, lng: SEOUL_LATLNG.lng });
       setDay(day);
       setSpending(Math.floor(amount / currencyExchange));
       setChosenCategory(category);
@@ -59,7 +54,7 @@ const Register = ({
       setChosenCategory('');
       setDescription('');
       setLocation('');
-      setCoordinates({ lat: SEOUL_LATLNG.lat, lng: SEOUL_LATLNG.lng });
+      setCoordinates(defaultLatLng);
       setSpendingId('');
       setChosenSpending({});
     }
@@ -87,15 +82,6 @@ const Register = ({
       coordinates,
       spendingId: id
     });
-
-    setDay('출발 전');
-    setSpending('');
-    setChosenCategory('');
-    setDescription('');
-    setLocation('');
-    setCoordinates({ lat: SEOUL_LATLNG.lat, lng: SEOUL_LATLNG.lng });
-    setSpendingId('');
-    setChosenSpending({});
 
     return setShouldModalOpen(false);
   };

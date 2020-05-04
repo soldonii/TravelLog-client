@@ -1,23 +1,20 @@
 import React, { useEffect } from 'react';
 import { GoogleMap, withGoogleMap, Marker, InfoWindow } from 'react-google-maps';
 
-import { getDefaultLatLng } from '../../lib/index';
 import mapStyle from '../../lib/mapStyle.json';
 
-const Map = ({ coordinates, travelCountry }) => {
-  const currentLatLng = getDefaultLatLng(travelCountry);
-  console.log('cor', coordinates);
-  console.log('culang', currentLatLng);
-
+const Map = ({ coordinates }) => {
+  console.log('cor[0]', coordinates[0]);
   return (
     <GoogleMap
       defaultZoom={10}
       defaultOptions={{ styles: mapStyle }}
-      center={currentLatLng ?
-        currentLatLng :
-        { lat: coordinates[0].lat, lng: coordinates[0].lng }}
+      center={ coordinates[0] ?
+        { lat: coordinates[coordinates.length - 1].lat, lng: coordinates[coordinates.length - 1].lng } :
+        { lat: 0, lng: 0 }
+      }
     >
-      {coordinates.length && coordinates.map((co, idx) => (
+      {coordinates.length && coordinates[0] && coordinates.map((co, idx) => (
         <Marker
           key={idx}
           position={{ lat: co.lat, lng: co.lng }}
@@ -25,7 +22,6 @@ const Map = ({ coordinates, travelCountry }) => {
         />
       ))}
 
-      
       {/* {coordinates.lat && (
         <InfoWindow position={{
           lat: coordinates.lat,
