@@ -142,6 +142,7 @@ const Register = ({
           containerElement={<div style={{ height: 'calc(100% - 6rem)', width: '100%', marginTop: '1rem' }} />}
           mapElement={<div style={{ height: '100%' }} />}
           coordinates={[coordinates]}
+          travelCountry={travelCountry}
         />
       </SC.Register.Map>
     </SC.Register.Wrapper>

@@ -6,6 +6,12 @@ import FlightCard from './FlightCard';
 import AccomodationCard from './AccomodationCard';
 import Button from '../layout/Button';
 
+const buttonStyle = {
+  position: 'absolute',
+  right: '2rem',
+  top: '2rem'
+};
+
 const PurchaseCandidates = ({
   flightStack,
   accomodationStack,
@@ -14,10 +20,7 @@ const PurchaseCandidates = ({
   onSubmit
 }) => (
   <Fragment>
-    <Button
-      style={{ position: 'absolute', right: '2rem', top: '2rem' }}
-      onClick={onSubmit}
-    >구매 확정</Button>
+    <Button style={buttonStyle} onClick={onSubmit}>구매 확정</Button>
     <ModalContent>
       <h1>관심 항공권</h1>
       <Scrollable>

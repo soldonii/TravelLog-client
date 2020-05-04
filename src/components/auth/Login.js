@@ -17,9 +17,9 @@ const Login = ({
     {loading ?
       <Loading message='로그인 중입니다' loadingImg={airplaneLoading} /> :
       <Fragment>
-        <SC.CoverImage imageUrl={backgroundImg} />
-        <SC.CoverDescription>
-          <SC.TextContainer>
+        <SC.Login.CoverImage imageUrl={backgroundImg} />
+        <SC.Login.CoverDescription>
+          <SC.Login.TextContainer>
             <h1>TRAVELLOG</h1>
             <h3>여행의 모든 것을 기록하세요.</h3>
             <img
@@ -27,8 +27,8 @@ const Login = ({
               alt='kakao login'
               onClick={onLoginButtonClick}
             />
-          </SC.TextContainer>
-        </SC.CoverDescription>
+          </SC.Login.TextContainer>
+        </SC.Login.CoverDescription>
       </Fragment>}
   </DefaultLayout>
 );

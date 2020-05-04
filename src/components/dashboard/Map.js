@@ -1,26 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { GoogleMap, withGoogleMap, Marker, InfoWindow } from 'react-google-maps';
 
-import * as parksData from './skateboard.json';
+import { getDefaultLatLng } from '../../lib/index';
 import mapStyle from '../../lib/mapStyle.json';
 
-const Map = ({ coordinates }) => {
-  const [ selectedPark, setSelectedPark ] = useState(null);
+const Map = ({ coordinates, travelCountry }) => {
+  const currentLatLng = getDefaultLatLng(travelCountry);
+  console.log('cor', coordinates);
+  console.log('culang', currentLatLng);
 
   return (
     <GoogleMap
       defaultZoom={10}
-      defaultCenter={ { lat: 37.566536, lng: 126.977966 }}
       defaultOptions={{ styles: mapStyle }}
-      center={{ lat: coordinates[0].lat, lng: coordinates[0].lng }}
+      center={currentLatLng ?
+        currentLatLng :
+        { lat: coordinates[0].lat, lng: coordinates[0].lng }}
     >
       {coordinates.length && coordinates.map((co, idx) => (
         <Marker
           key={idx}
-          // position={{ lat: co[0], lng: co[1] }}
+          position={{ lat: co.lat, lng: co.lng }}
           onClick={() => {}}
         />
       ))}
+
+      
       {/* {coordinates.lat && (
         <InfoWindow position={{
           lat: coordinates.lat,

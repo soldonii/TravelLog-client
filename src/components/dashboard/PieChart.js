@@ -1,34 +1,43 @@
-// https://blog.bitsrc.io/customizing-chart-js-in-react-2199fa81530a
 import React, { useEffect, createRef } from 'react';
 import Chart from 'chart.js';
 
 import * as SC from './dashboard.styles';
 
+import { usePrevious } from '../../lib/index';
+
 let chartRef = createRef();
 
-const PieChart = () => {
-  useEffect(() => {
-    const myChartRef = chartRef.current.getContext('2d');
+const PieChart = ({ spendingByCategory }) => {
+  const prevValue = usePrevious(spendingByCategory);
 
-    new Chart(myChartRef, {
-      type: 'pie',
-      data: {
-        labels: [ '숙박', '항공', '교통', '관광', '식비', '쇼핑', '기타' ],
-        datasets: [
-            {
-              label: 'expenditure',
-              backgroundColor: ['rgb(255, 99, 132)', 'rgb(0, 0, 0)'],
-              borderColor: 'rgb(0, 99, 132)',
-              borderWidth: 2,
-              data: [799000, 1234184, 50239, 230000, 100000, 493333, 0],
-            }
-        ]
-      },
-      options: {
-        devicePixelRatio: 2
-      }
-    })
-  }, []);
+  useEffect(() => {
+    if (JSON.stringify(prevValue) !== JSON.stringify(spendingByCategory)) {
+      const myChartRef = chartRef.current.getContext('2d');
+
+      new Chart(myChartRef, {
+        type: 'pie',
+        data: {
+          labels: Object.keys(spendingByCategory),
+          datasets: [
+              {
+                label: 'expenditure',
+                backgroundColor: ['#409EBF', '#2B4063', '#AAC4CF', '#8A2170', '#F2F1DF', '#613365', '#F2F2F2'],
+                borderColor: '#613365',
+                borderWidth: 2,
+                data: Object.values(spendingByCategory),
+              }
+          ]
+        },
+        options: {
+          legend: {
+            position: "right"
+          }
+        }
+      })
+    }
+
+    // eslint-disable-next-line
+  }, [ spendingByCategory ]);
 
   return (
     <SC.PieChart.Wrapper>

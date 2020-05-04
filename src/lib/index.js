@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { useEffect, useRef } from 'react';
+import latlngs from '../lib/latlng.json';
 
 export const setTokenToHeader = token => {
   if (token) {
@@ -36,3 +38,38 @@ export const getDayList = dateArray => {
 };
 
 export const numberWithCommas = number => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+export const usePrevious = value => {
+  const ref = useRef();
+
+  useEffect(() => {
+    ref.current = value;
+  });
+
+  return ref.current;
+};
+
+const SEOUL_LATLNG = {
+  lat: 37.566536,
+  lng: 126.977966
+};
+
+export const getDefaultLatLng = travelCountry => {
+  let currentLatLng;
+
+  if (travelCountry) {
+    const currentCountry = latlngs.ref_country_codes.find(item => {
+      return item.country.toLowerCase() === travelCountry.toLowerCase();
+    });
+
+    if (currentCountry) {
+      currentLatLng = { lat: currentCountry.latitude, lng: currentCountry.longitude }
+    } else {
+      currentLatLng = { lat: SEOUL_LATLNG.lat, lng: SEOUL_LATLNG.lng }
+    }
+  } else {
+    currentLatLng = { lat: SEOUL_LATLNG.lat, lng: SEOUL_LATLNG.lng }
+  }
+
+  return currentLatLng;
+};

@@ -9,12 +9,15 @@ import * as SC from './dashboard.styles';
 
 const Dashboard = ({
   spendingByDates,
-  onSpendingListClick
+  onSpendingListClick,
+  spendingByCategory,
+  latLngs,
+  travelCountry
 }) => {
   return (
     <DefaultLayout>
       <SC.Dashboard.Wrapper>
-        <PieChart />
+        <PieChart spendingByCategory={spendingByCategory} />
       </SC.Dashboard.Wrapper>
       <SC.Dashboard.Wrapper>
         <Summary
@@ -23,12 +26,13 @@ const Dashboard = ({
         />
       </SC.Dashboard.Wrapper>
       <SC.Dashboard.Wrapper>
-        {/* <Map
+        <Map
           loadingElement={<div style={{ height: '100%' }} />}
           containerElement={<div style={{ height: '100%', width: '100%' }} />}
           mapElement={<div style={{ height: '100%' }} />}
-          coordinates={[]}
-        /> */}
+          coordinates={latLngs}
+          travelCountry={travelCountry}
+        />
       </SC.Dashboard.Wrapper>
     </DefaultLayout>
   );

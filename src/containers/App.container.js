@@ -23,13 +23,12 @@ const AppContainer = ({
       <Switch>
         <Route exact path='/' component={AuthContainer} />
         <ProtectedRoute
-          exact
           path={`/users/${userId}/travel`}
           component={TravelContainer}
           isAuthenticated={isAuthenticated}
         />
         <ProtectedRoute
-          path={`/users/${userId}/travel/dashboard`}
+          path={`/users/${userId}/dashboard`}
           component={DashboardContainer}
           isAuthenticated={isAuthenticated}
         />

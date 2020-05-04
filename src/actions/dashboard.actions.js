@@ -17,11 +17,12 @@ export const getInitialData = dispatch => async travelId => {
   try {
     dispatch({ type: GET_INITIAL_DATA_PENDING });
 
-    const response = await axios.get(`${process.env.REACT_APP_SERVER_URI}/travel/dashboard`, {
+    const response = await axios.get(`${process.env.REACT_APP_SERVER_URI}/dashboard`, {
       params: { travelId }
     });
 
     const { travelCountry, spendingByDates, currencyExchange, currencyCode } = response.data;
+    console.log('resp', response.data);
 
     dispatch({ type: GET_INITIAL_DATA_SUCCESS, travelCountry, spendingByDates, currencyExchange, currencyCode });
   } catch (err) {
@@ -36,7 +37,7 @@ export const registerSpending = dispatch => async data => {
   dispatch({ type: REGISTER_SPENDING_PENDING });
 
   try {
-    const response = await axios.put(`${process.env.REACT_APP_SERVER_URI}/travel/dashboard`, { data });
+    const response = await axios.put(`${process.env.REACT_APP_SERVER_URI}/dashboard`, { data });
     const { spendingByDates } = response.data;
 
     dispatch({ type: REGISTER_SPENDING_SUCCESS, spendingByDates });

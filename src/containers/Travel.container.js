@@ -1,4 +1,5 @@
 import React, { useState, Fragment } from 'react';
+// import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 // import PropTypes from 'prop-types';
@@ -9,6 +10,7 @@ import Travel from '../components/travel/Travel';
 import Booking from '../components/travel/Booking';
 import PurchaseCandidates from '../components/travel/PurchaseCandidates';
 import Button from '../components/layout/Button';
+// import MyTravel from '../components/travel/MyTravel';
 
 import history from '../lib/history';
 
@@ -172,9 +174,9 @@ const TravelContainer = ({
       const { price: flightPrice } = priceAndProviderWithLinks[0];
       const { price: accomodationPrice } = boughtAccomodation;
 
-      const response = await axios.post(`${process.env.REACT_APP_SERVER_URI}/travel/dashboard`, {
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_URI}/dashboard`, {
         flightPrice: parseInt(flightPrice.slice(0, -1).replace(/,/gi, '')),
-        accomodationPrice: parseInt(accomodationPrice.replace(/,/gi, '')),
+        accomodationPrice: parseInt(accomodationPrice.replace(/,/gi, '') * travelDayList.length),
         travelCountry,
         travelDayList
       });
@@ -183,7 +185,7 @@ const TravelContainer = ({
 
       saveTravelId(travelId);
 
-      if (response.status === 200) history.push(`/users/${userId}/travel/dashboard`);
+      if (response.status === 200) history.push(`/users/${userId}/dashboard`);
     }
   };
 

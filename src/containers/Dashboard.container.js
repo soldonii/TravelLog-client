@@ -41,10 +41,43 @@ const DashboardContainer = ({
     setChosenSpending(targetList);
   };
 
+  const spendingByCategory = spendingByDates => {
+    const data = {
+      항공: 0,
+      숙박: 0,
+      식비: 0,
+      쇼핑: 0,
+      관광: 0,
+      교통: 0,
+      기타: 0
+    };
+
+    Object.values(spendingByDates).forEach(lists => {
+      lists.forEach(list => data[list.category] += list.amount);
+    });
+
+    return data;
+  };
+
+  const getLatLngs = spendingByDates => {
+    const latLngs = [];
+
+    Object.values(spendingByDates).forEach(lists => {
+      lists.forEach(list => {
+        if (list.location.coordinates) {
+          latLngs.push(list.location.coordinates);
+        }
+      });
+    });
+
+    return latLngs;
+  };
+
   return (
     <Fragment>
       <Navbar isAuthenticated={isAuthenticated} logo={logo}>
-        <Button>내 여행</Button>
+        {/* <Button onClick={() => history.push('travel/mytravels')}>내 여행</Button> */}
+        {/* <Button>내 여행</Button> */}
         <Button onClick={() => setShouldModalOpen(true)}>지출 등록</Button>
         <Button onClick={logout}>로그아웃</Button>
       </Navbar>
@@ -64,12 +97,16 @@ const DashboardContainer = ({
       <Dashboard
         spendingByDates={spendingByDates}
         onSpendingListClick={onSpendingListClick}
+        spendingByCategory={spendingByCategory(spendingByDates)}
+        latLngs={getLatLngs(spendingByDates)}
+        travelCountry={travelCountry}
       />
     </Fragment>
   );
 };
 
 const mapStateToProps = state => ({
+  userId: state.auth.userId,
   isAuthenticated: state.auth.isAuthenticated,
   travelId: state.travel.travelId,
   travelCountry: state.dashboard.travelCountry,
