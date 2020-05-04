@@ -3,7 +3,7 @@ import React from 'react';
 import DefaultLayout from '../layout/DefaultLayout';
 import PieChart from './PieChart';
 import Summary from './Summary';
-// import Map from './Map';
+import Map from './Map';
 
 import * as SC from './dashboard.styles';
 
@@ -23,7 +23,12 @@ const Dashboard = ({
         />
       </SC.Dashboard.Wrapper>
       <SC.Dashboard.Wrapper>
-        {/* <Map /> */}
+        {/* <Map
+          loadingElement={<div style={{ height: '100%' }} />}
+          containerElement={<div style={{ height: '100%', width: '100%' }} />}
+          mapElement={<div style={{ height: '100%' }} />}
+          coordinates={[]}
+        /> */}
       </SC.Dashboard.Wrapper>
     </DefaultLayout>
   );

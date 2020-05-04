@@ -10,23 +10,18 @@ const Map = ({ coordinates }) => {
   return (
     <GoogleMap
       defaultZoom={10}
-      defaultCenter={{ lat: 45.421532, lng: -75.697189 }}
+      defaultCenter={ { lat: 37.566536, lng: 126.977966 }}
       defaultOptions={{ styles: mapStyle }}
+      center={{ lat: coordinates[0].lat, lng: coordinates[0].lng }}
     >
-      {parksData.features.map(park => (
+      {coordinates.length && coordinates.map((co, idx) => (
         <Marker
-          key={park.properties.PARK_ID}
-          position={{
-            lat: park.geometry.coordinates[1],
-            lng: park.geometry.coordinates[0]
-          }}
-          onClick={() => {
-            setSelectedPark(park);
-          }}
+          key={idx}
+          // position={{ lat: co[0], lng: co[1] }}
+          onClick={() => {}}
         />
       ))}
-
-      {coordinates.lat && (
+      {/* {coordinates.lat && (
         <InfoWindow position={{
           lat: coordinates.lat,
           lng: coordinates.lng
@@ -36,11 +31,11 @@ const Map = ({ coordinates }) => {
         }}
         >
           <div>
-            {/* <h2>{selectedPark.properties.NAME}</h2>
-            <p>{selectedPark.properties.DESCRIPTON}</p> */}
+            <h2>{selectedPark.properties.NAME}</h2>
+            <p>{selectedPark.properties.DESCRIPTON}</p>
           </div>
         </InfoWindow>
-      )}
+      )} */}
     </GoogleMap>
   );
 };

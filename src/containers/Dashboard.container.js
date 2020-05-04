@@ -36,6 +36,7 @@ const DashboardContainer = ({
   const onSpendingListClick = (day, spendingId) => {
     const targetList = spendingByDates[day].find(list => list.spendingId === spendingId);
     targetList.day = day;
+
     setShouldModalOpen(true);
     setChosenSpending(targetList);
   };
@@ -50,12 +51,14 @@ const DashboardContainer = ({
       <SlideInModal shouldModalOpen={shouldModalOpen} setShouldModalOpen={setShouldModalOpen}>
         <Register
           shouldModalOpen={shouldModalOpen}
+          setShouldModalOpen={setShouldModalOpen}
           travelId={travelId}
           spendingByDates={spendingByDates}
           currencyExchange={currencyExchange}
           currencyCode={currencyCode}
           registerSpending={registerSpending}
           chosenSpending={chosenSpending}
+          setChosenSpending={setChosenSpending}
         />
       </SlideInModal>
       <Dashboard
