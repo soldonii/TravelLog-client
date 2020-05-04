@@ -10,7 +10,7 @@ import Register from '../components/dashboard/Register';
 import logo from '../assets/images/logo.png';
 
 import { logout } from '../actions/auth.action';
-import { getInitialData } from '../actions/dashboard.actions';
+import { getInitialData, registerSpending } from '../actions/dashboard.actions';
 
 const DashboardContainer = ({
   isAuthenticated,
@@ -21,15 +21,24 @@ const DashboardContainer = ({
   currencyCode,
 
   getInitialData,
+  registerSpending,
   logout
 }) => {
-  const [ shouldModalOpen, setShouldModalOpen ] = useState(true);
+  const [ shouldModalOpen, setShouldModalOpen ] = useState(false);
+  const [ chosenSpending, setChosenSpending ] = useState({});
 
   useEffect(() => {
     getInitialData(travelId);
 
     // eslint-disable-next-line
   }, []);
+
+  const onSpendingListClick = (day, spendingId) => {
+    const targetList = spendingByDates[day].find(list => list.spendingId === spendingId);
+    targetList.day = day;
+    setShouldModalOpen(true);
+    setChosenSpending(targetList);
+  };
 
   return (
     <Fragment>
@@ -40,12 +49,19 @@ const DashboardContainer = ({
       </Navbar>
       <SlideInModal shouldModalOpen={shouldModalOpen} setShouldModalOpen={setShouldModalOpen}>
         <Register
+          shouldModalOpen={shouldModalOpen}
+          travelId={travelId}
           spendingByDates={spendingByDates}
           currencyExchange={currencyExchange}
           currencyCode={currencyCode}
+          registerSpending={registerSpending}
+          chosenSpending={chosenSpending}
         />
       </SlideInModal>
-      <Dashboard />
+      <Dashboard
+        spendingByDates={spendingByDates}
+        onSpendingListClick={onSpendingListClick}
+      />
     </Fragment>
   );
 };
@@ -58,12 +74,13 @@ const mapStateToProps = state => ({
   currencyExchange: state.dashboard.currencyExchange,
   currencyCode: state.dashboard.currencyCode,
   loading: state.dashboard.loading,
-  error: state.dashboard.error
+  error: state.dashboard.error,
 });
 
 const mapDispatchToProps = dispatch => ({
   logout: logout(dispatch),
-  getInitialData: getInitialData(dispatch)
+  getInitialData: getInitialData(dispatch),
+  registerSpending: registerSpending(dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainer);

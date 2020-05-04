@@ -5,9 +5,9 @@ import * as colors from '../../lib/colors';
 
 export const Dashboard = {
   Wrapper: styled.section`
-    height: 100vh;
+    height: 90vh;
     width: 33.3vw;
-    border: 1px solid black;
+    margin-top: 10vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -25,6 +25,80 @@ export const PieChart = {
   Title: styled.h1`
     font-size: 3rem;
     margin-bottom: 3rem;
+  `
+};
+
+export const Summary = {
+  ByDates: styled.div`
+    margin: 1rem;
+    padding: 1rem;
+    border: 1px solid black;
+    box-shadow: 2px 2px gray;
+    min-height: 5rem;
+    width: calc(100% - 2rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    h1 {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      color: ${colors.HIGHLIGHT_COLOR};
+    }
+  `,
+  List: styled.div`
+    width: 100%;
+    min-height: 5rem;
+    padding: 0.5rem;
+    margin: 0.3rem 0;
+    display: flex;
+    cursor: pointer;
+    transition: opacity 0.5s ease-in-out;
+
+    &:hover {
+      background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+      opacity: 1;
+    }
+  `,
+  Icon: styled.div`
+    height: 4rem;
+    width: 4rem;
+    margin-right: 1rem;
+
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  `,
+  Description: styled.div`
+    width: calc(100% - 4rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    div {
+      width: 100%;
+      height: 80%;
+      display: flex;
+      justify-content: space-between;
+      font-size: 2rem;
+    }
+
+    .location-title {
+      width: 100%;
+      font-size: 1rem;
+      color: gray;
+      text-align: right;
+    }
+
+    .description, .amount, .location-title {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   `
 };
 

@@ -2,17 +2,18 @@ import {
   GET_INITIAL_DATA_PENDING,
   GET_INITIAL_DATA_SUCCESS,
   GET_INITIAL_DATA_FAILED,
-  // SAVE_TRAVEL_INFORMATION,
-  // GET_CURRENCY
+  REGISTER_SPENDING_PENDING,
+  REGISTER_SPENDING_SUCCESS,
+  REGISTER_SPENDING_FAILED
 } from '../constants/index';
 
 const initialState = {
   loading: '',
   error: null,
   travelCountry: '',
-  spendingByDates: [],
+  spendingByDates: {},
   currencyExchange: '',
-  currencyCode: ''
+  currencyCode: '',
 };
 
 const dashboardReducer = (state = initialState, action) => {
@@ -35,6 +36,27 @@ const dashboardReducer = (state = initialState, action) => {
       };
 
     case GET_INITIAL_DATA_FAILED:
+      return {
+        ...state,
+        loading: false,
+        error: action.error
+      };
+
+    case REGISTER_SPENDING_PENDING:
+      return {
+        ...state,
+        loading: true
+      };
+
+    case REGISTER_SPENDING_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        spendingByDates: action.spendingByDates
+      };
+
+    case REGISTER_SPENDING_FAILED:
       return {
         ...state,
         loading: false,

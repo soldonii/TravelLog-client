@@ -6,7 +6,7 @@ import sightseeing from '../../assets/images/categories/sightseeing.png';
 import transport from '../../assets/images/categories/transport.png';
 import etc from '../../assets/images/categories/etc.png';
 
-const icons = {
+export const icons = {
   flight: {
     icon: flight,
     name: '항공'
@@ -37,4 +37,12 @@ const icons = {
   }
 };
 
-export default icons;
+export const iconsByName = {
+  항공: flight,
+  숙박: accomodation,
+  식비: food,
+  쇼핑: shopping,
+  관광: sightseeing,
+  교통: transport,
+  기타: etc
+};

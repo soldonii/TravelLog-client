@@ -13,12 +13,12 @@ const Price = ({
       type='number'
       placeholder='금액입력'
       onChange={e => onInputChange(e.target.value)}
-      value={inputValue}
+      value={inputValue === '' ? '' : Math.round(inputValue)}
     />
     <h2>{currencyCode}</h2>
     <h5>=
       <span className='converted-numbers'>
-        {` ${numberWithCommas(inputValue * currencyExchange)}`}
+        {` ${numberWithCommas(Math.round(inputValue * currencyExchange))}`}
       </span>원
       <span className='currency-unit'>
         {' '}({`1${currencyCode} 당 ${numberWithCommas(currencyExchange)}원`})

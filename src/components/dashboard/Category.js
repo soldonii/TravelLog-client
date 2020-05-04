@@ -1,6 +1,6 @@
 import React from 'react';
 
-import icons from './categoryIcon';
+import { icons } from './categoryIcon';
 
 const Category = ({
   chosen,

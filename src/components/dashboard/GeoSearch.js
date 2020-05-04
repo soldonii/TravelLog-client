@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
-import * as colors from '../../lib/colors';
 
+import * as colors from '../../lib/colors';
 import * as SC from './dashboard.styles';
 
 const GeoSearch = ({
