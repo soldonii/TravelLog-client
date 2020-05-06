@@ -4,17 +4,25 @@ import {
   GET_INITIAL_DATA_FAILED,
   REGISTER_SPENDING_PENDING,
   REGISTER_SPENDING_SUCCESS,
-  REGISTER_SPENDING_FAILED
+  REGISTER_SPENDING_FAILED,
+  DELETE_SPENDING_PENDING,
+  DELETE_SPENDING_SUCCESS,
+  DELETE_SPENDING_FAILED
 } from '../constants/index';
+
+const SEOUL_LATLNG = {
+  lat: 37.566536,
+  lng: 126.977966
+};
 
 const initialState = {
   loading: '',
   error: null,
   travelCountry: '',
   spendingByDates: {},
-  currencyExchange: '',
+  currencyExchange: 0,
   currencyCode: '',
-  defaultLatLng: {}
+  defaultLatLng: { lat: SEOUL_LATLNG.lat, lng: SEOUL_LATLNG.lng }
 };
 
 const dashboardReducer = (state = initialState, action) => {
@@ -59,6 +67,26 @@ const dashboardReducer = (state = initialState, action) => {
       };
 
     case REGISTER_SPENDING_FAILED:
+      return {
+        ...state,
+        loading: false,
+        error: action.error
+      };
+
+    case DELETE_SPENDING_PENDING:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case DELETE_SPENDING_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        spendingByDates: action.spendingByDates
+      };
+
+    case DELETE_SPENDING_FAILED:
       return {
         ...state,
         loading: false,

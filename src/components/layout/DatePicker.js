@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import DateRangePicker from '@wojtekmaj/react-daterange-picker'
 
@@ -69,5 +70,11 @@ const DatePickerWrapper = styled.div`
     }
   }
 `;
+
+DatePicker.propTypes = {
+  title: PropTypes.string.isRequired,
+  inputDates: PropTypes.array.isRequired,
+  onDatesChange: PropTypes.func.isRequired,
+};
 
 export default DatePicker;

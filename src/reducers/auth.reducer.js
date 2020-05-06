@@ -60,26 +60,3 @@ const authReducer = (state = initialState, action) => {
 };
 
 export default authReducer;
-
-
-
-// export const authReducer = (state = initialState, action) => {
-//   switch (action.type) {
-//     case CLEAR_AUTH_ERROR:
-//       return {
-//         ...state,
-//         loading: false,
-//         error: null
-//       };
-
-//     case LOGOUT:
-//       localStorage.removeItem('token');
-//       return {
-//         token: '',
-//         nickname: '',
-//         hasSignedUp: false,
-//         isAuthenticated: false,
-//         loading: false,
-//         error: null
-//       };
-// };

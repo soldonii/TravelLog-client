@@ -5,7 +5,10 @@ import {
   GET_INITIAL_DATA_FAILED,
   REGISTER_SPENDING_PENDING,
   REGISTER_SPENDING_SUCCESS,
-  REGISTER_SPENDING_FAILED
+  REGISTER_SPENDING_FAILED,
+  DELETE_SPENDING_PENDING,
+  DELETE_SPENDING_SUCCESS,
+  DELETE_SPENDING_FAILED
 } from '../constants/index';
 
 import { setTokenToHeader, getDefaultLatLng } from '../lib/index';
@@ -22,10 +25,10 @@ export const getInitialData = dispatch => async travelId => {
     });
 
     const { travelCountry, spendingByDates, currencyExchange, currencyCode } = response.data;
-    // 여기서 나라를 기준으로 coordinates 구하기
     const defaultLatLng = getDefaultLatLng(travelCountry);
 
-    dispatch({type: GET_INITIAL_DATA_SUCCESS,
+    dispatch({
+      type: GET_INITIAL_DATA_SUCCESS,
       travelCountry,
       spendingByDates,
       currencyExchange,
@@ -53,3 +56,23 @@ export const registerSpending = dispatch => async data => {
   }
 };
 
+export const deleteSpending = dispatch => async (travelId, spendingId) => {
+  const token = localStorage.getItem('token');
+  setTokenToHeader(token);
+
+  dispatch({ type: DELETE_SPENDING_PENDING });
+
+  try {
+    const response = await axios.delete(`${process.env.REACT_APP_SERVER_URI}/dashboard`, {
+      data: {
+        travelId,
+        spendingId
+      }
+    });
+    const { spendingByDates } = response.data;
+
+    dispatch({ type: DELETE_SPENDING_SUCCESS, spendingByDates });
+  } catch (err) {
+    dispatch({ type: DELETE_SPENDING_FAILED });
+  }
+};

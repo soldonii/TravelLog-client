@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 
 import * as SC from './travel.styles';
 
@@ -42,5 +43,16 @@ const AccomodationCard = ({
     </SC.Accomodation.Description>
   </SC.Accomodation.Information>
 );
+
+AccomodationCard.propTypes = {
+  item: PropTypes.object.isRequired,
+  description: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  infoList: PropTypes.array.isRequired,
+  price: PropTypes.array.isRequired,
+  link: PropTypes.string.isRequired,
+  mode: PropTypes.string,
+  onClick: PropTypes.func.isRequired
+};
 
 export default AccomodationCard;

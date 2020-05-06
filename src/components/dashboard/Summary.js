@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Scrollable from '../layout/Scrollable';
 
 import { iconsByName } from './categoryIcon';
@@ -38,59 +39,9 @@ const Summary = ({
   </Scrollable>
 );
 
+Summary.propTypes = {
+  spendingByDates: PropTypes.object.isRequired,
+  onSpendingListClick: PropTypes.func.isRequired
+};
+
 export default Summary;
-
-// const dates = {
-//   "출발 전": [
-//     {
-//       "category": "항공",
-//       "description": "항공권 구매",
-//       "amount": 984000,
-//       "location": {
-//         "title": "출발 전",
-//         "coordinates": ""
-//       },
-//       "memo": "항공권 구매"
-//     },
-//     {
-//       "category": "숙박",
-//       "description": "에어비앤비 숙소 구매",
-//       "amount": 75558,
-//       "location": {
-//         "title": "출발 전",
-//         "coordinates": ""
-//       },
-//       "memo": "에어비앤비 숙소 구매"
-//     }
-//   ],
-//   "2020-05-19(화)": [
-//     {
-//       "category": "식비",
-//       "description": "점심",
-//       "amount": "10",
-//       "location": {
-//         "title": "Starbucks, 브로드웨이 뉴욕 United States",
-//         "coordinates": {
-//           "lat": 40.759636,
-//           "lng": -73.985222
-//         }
-//       }
-//     }
-//   ],
-//   "2020-05-20(수)": [
-//     {
-//       "category": "식비",
-//       "description": "저녁식사",
-//       "amount": 24500,
-//       "location": {
-//         "title": "Superior, 위스콘신 미국",
-//         "coordinates": {
-//           "lat": 46.7207737,
-//           "lng": -92.10407959999999
-//         }
-//       }
-//     }
-//   ]
-// }
-
-

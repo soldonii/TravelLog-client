@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 
 import * as colors from '../../lib/colors';
@@ -34,7 +35,7 @@ const GeoSearch = ({
               };
 
               return (
-                <div {...getSuggestionItemProps(suggestion, { style })}>
+                <div key={suggestion.description} {...getSuggestionItemProps(suggestion, { style })}>
                   {suggestion.description}
                 </div>
               );
@@ -44,6 +45,12 @@ const GeoSearch = ({
       )}
     </PlacesAutocomplete>
   );
+};
+
+GeoSearch.propTypes = {
+  location: PropTypes.string.isRequired,
+  setLocation: PropTypes.func.isRequired,
+  setCoordinates: PropTypes.func.isRequired,
 };
 
 export default GeoSearch;

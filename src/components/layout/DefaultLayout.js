@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const DefaultLayout = ({ children, img, style }) => (
+const DefaultLayout = ({
+  children,
+  img,
+  style
+}) => (
   <Wrapper backgroundImg={img} style={style}>
     {children}
   </Wrapper>
 );
-
-DefaultLayout.propTypes = {
-  children: PropTypes.node
-};
 
 const Wrapper = styled.section`
   background-image: url(${props => props.backgroundImg});
@@ -22,5 +22,10 @@ const Wrapper = styled.section`
   min-height: 100vh;
   max-width: 100vw;
 `;
+
+DefaultLayout.propTypes = {
+  children: PropTypes.node,
+  style: PropTypes.object
+};
 
 export default DefaultLayout;

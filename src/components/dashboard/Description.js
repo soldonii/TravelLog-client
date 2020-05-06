@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Description = ({
   inputValue,
@@ -11,5 +12,10 @@ const Description = ({
     onChange={e => onInputChange(e.target.value)}
   />
 );
+
+Description.propTypes = {
+  inputValue: PropTypes.string.isRequired,
+  onInputChange: PropTypes.func.isRequired,
+};
 
 export default Description;

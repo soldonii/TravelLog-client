@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 
 import { numberWithCommas } from '../../lib/index';
 
@@ -26,5 +27,12 @@ const Price = ({
     </h5>
   </Fragment>
 );
+
+Price.propTypes = {
+  inputValue: PropTypes.any,
+  onInputChange: PropTypes.func.isRequired,
+  currencyExchange: PropTypes.number.isRequired,
+  currencyCode: PropTypes.string.isRequired,
+};
 
 export default Price;

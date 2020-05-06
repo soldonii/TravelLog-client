@@ -1,4 +1,5 @@
 import React, { useEffect, createRef } from 'react';
+import PropTypes from 'prop-types';
 import Chart from 'chart.js';
 
 import * as SC from './dashboard.styles';
@@ -19,13 +20,13 @@ const PieChart = ({ spendingByCategory }) => {
         data: {
           labels: Object.keys(spendingByCategory),
           datasets: [
-              {
-                label: 'expenditure',
-                backgroundColor: ['#409EBF', '#2B4063', '#AAC4CF', '#8A2170', '#F2F1DF', '#613365', '#F2F2F2'],
-                borderColor: '#613365',
-                borderWidth: 2,
-                data: Object.values(spendingByCategory),
-              }
+            {
+              label: 'expenditure',
+              backgroundColor: ['#409EBF', '#2B4063', '#AAC4CF', '#8A2170', '#F2F1DF', '#613365', '#F2F2F2'],
+              borderColor: '#613365',
+              borderWidth: 2,
+              data: Object.values(spendingByCategory),
+            }
           ]
         },
         options: {
@@ -33,7 +34,7 @@ const PieChart = ({ spendingByCategory }) => {
             position: "right"
           }
         }
-      })
+      });
     }
 
     // eslint-disable-next-line
@@ -45,6 +46,10 @@ const PieChart = ({ spendingByCategory }) => {
       <canvas id='mychart' ref={chartRef} width='400' height='300' />
     </SC.PieChart.Wrapper>
   );
+};
+
+PieChart.propTypes = {
+  spendingByCategory: PropTypes.object.isRequired
 };
 
 export default PieChart;

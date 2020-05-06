@@ -22,18 +22,24 @@ export const requestCrawling = dispatch => async (country, city, travelDates) =>
   try {
     dispatch({ type: CRAWLING_START });
 
-    const response = await axios.post(`${process.env.REACT_APP_SERVER_URI}/travel`, {
+    const kayakResponse = await axios.post(`${process.env.REACT_APP_SERVER_URI}/travel/kayak`, {
       country,
       city,
       travelDates
     });
 
-    const [ kayak, airbnb ] = response.data;
-    // console.log(response.data);
+    if (kayakResponse.status === 200) {
+      const airbnbResponse = await axios.post(`${process.env.REACT_APP_SERVER_URI}/travel/airbnb`, {
+        city,
+        travelDates
+      });
 
-    const travelDayList = getDayList(travelDates);
+      const { kayak } = kayakResponse.data;
+      const { airbnb } = airbnbResponse.data;
+      const travelDayList = getDayList(travelDates);
 
-    dispatch({ type: CRAWLING_SUCCESS, kayak, airbnb, country, travelDayList });
+      dispatch({ type: CRAWLING_SUCCESS, kayak, airbnb, country, travelDayList });
+    }
   } catch (err) {
     dispatch({ type: CRAWLING_FAILED, error: err.response.data.errorMessage });
   }

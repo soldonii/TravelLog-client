@@ -10,7 +10,8 @@ import Register from '../components/dashboard/Register';
 import logo from '../assets/images/logo.png';
 
 import { logout } from '../actions/auth.action';
-import { getInitialData, registerSpending } from '../actions/dashboard.actions';
+import { getDefaultLatLng } from '../lib/index';
+import { getInitialData, registerSpending, deleteSpending } from '../actions/dashboard.actions';
 
 const DashboardContainer = ({
   isAuthenticated,
@@ -23,6 +24,7 @@ const DashboardContainer = ({
 
   getInitialData,
   registerSpending,
+  deleteSpending,
   logout
 }) => {
   const [ shouldModalOpen, setShouldModalOpen ] = useState(false);
@@ -71,7 +73,7 @@ const DashboardContainer = ({
       });
     });
 
-    return latLngs;
+    return latLngs.length ? latLngs : [ getDefaultLatLng() ]
   };
 
   return (
@@ -94,6 +96,7 @@ const DashboardContainer = ({
           chosenSpending={chosenSpending}
           setChosenSpending={setChosenSpending}
           defaultLatLng={defaultLatLng}
+          deleteSpending={deleteSpending}
         />
       </SlideInModal>
       <Dashboard
@@ -123,7 +126,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   logout: logout(dispatch),
   getInitialData: getInitialData(dispatch),
-  registerSpending: registerSpending(dispatch)
+  registerSpending: registerSpending(dispatch),
+  deleteSpending: deleteSpending(dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainer);

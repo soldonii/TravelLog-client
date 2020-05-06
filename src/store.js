@@ -8,8 +8,7 @@ import { rootReducer } from './reducers/root.reducer';
 const persistConfig = {
   key: 'root',
   storage,
-  // whitelist: ['auth']
-  whitelist: ['auth', 'travel', 'dashboard']
+  whitelist: ['auth', 'travel']
 };
 
 const enhancedReducer = persistReducer(persistConfig, rootReducer);

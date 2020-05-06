@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { icons } from './categoryIcon';
 
@@ -13,5 +14,10 @@ const Category = ({
     </div>
   ))
 );
+
+Category.propTypes = {
+  chosen: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
 
 export default Category;

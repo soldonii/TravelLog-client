@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const SlideInModal = ({
   shouldModalOpen,
@@ -37,5 +38,11 @@ const ModalWrapper = styled.div`
   display: flex;
   background: white;
 `;
+
+SlideInModal.propTypes = {
+  shouldModalOpen: PropTypes.bool.isRequired,
+  setShouldModalOpen: PropTypes.func.isRequired,
+  children: PropTypes.node
+};
 
 export default SlideInModal;

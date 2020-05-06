@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import styled from 'styled-components'
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Scrollable from './Scrollable';
 
 import * as colors from '../../lib/colors';
@@ -95,5 +95,13 @@ const Container = styled.div`
     }
   }
 `;
+
+Dropdown.propTypes = {
+  style: PropTypes.object,
+  buttonName: PropTypes.string,
+  currentItem: PropTypes.object,
+  dropDownOptions: PropTypes.array,
+  onItemClick: PropTypes.func.isRequired,
+};
 
 export default Dropdown;

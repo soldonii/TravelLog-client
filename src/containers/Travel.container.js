@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import Navbar from '../components/layout/Navbar';
 import SlideInModal from '../components/layout/SlideInModal';
@@ -75,7 +75,7 @@ const TravelContainer = ({
           userId={userId}
         />
       </SlideInModal>
-      {kayakData.length && airbnbData.length ?
+      {kayakData.length || airbnbData.length ?
         <Booking
           flights={kayakData}
           accommodations={airbnbData}
@@ -97,6 +97,32 @@ const TravelContainer = ({
       }
     </Fragment>
   );
+};
+
+TravelContainer.propTypes = {
+  history: PropTypes.object.isRequired,
+  userId: PropTypes.string.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.string,
+  kayakData: PropTypes.array.isRequired,
+  airbnbData: PropTypes.array.isRequired,
+  flightStack: PropTypes.array.isRequired,
+  accomodationStack: PropTypes.array.isRequired,
+  boughtFlight: PropTypes.object.isRequired,
+  boughtAccomodation: PropTypes.object.isRequired,
+  travelCountry: PropTypes.string.isRequired,
+  travelDayList: PropTypes.array.isRequired,
+  logout: PropTypes.func.isRequired,
+  requestCrawling: PropTypes.func.isRequired,
+  clearError: PropTypes.func.isRequired,
+  addFlightToStack: PropTypes.func.isRequired,
+  addAccomodationToStack: PropTypes.func.isRequired,
+  selectFlightTicket: PropTypes.func.isRequired,
+  deselectFlightTicket: PropTypes.func.isRequired,
+  selectAccomodation: PropTypes.func.isRequired,
+  deselectAccomodation: PropTypes.func.isRequired,
+  saveTravelId: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
