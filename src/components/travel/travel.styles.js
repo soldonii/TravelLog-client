@@ -307,3 +307,27 @@ export const Travel = {
     }
   `
 };
+
+export const TravelCard = {
+  Wrapper: styled.div`
+    border: 1px solid black;
+    min-height: 30rem;
+    width: 30rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    cursor: pointer;
+    position: relative;
+
+    h1 {
+      font-size: 3rem;
+    }
+
+    h3 {
+      position: absolute;
+      bottom: 2rem;
+    }
+  `,
+}

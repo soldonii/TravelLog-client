@@ -15,7 +15,8 @@ import history from '../lib/history';
 
 const AppContainer = ({
   isAuthenticated,
-  userId
+  userId,
+  travelId
 }) => (
   <Fragment>
     <GlobalStyle />
@@ -28,7 +29,7 @@ const AppContainer = ({
           isAuthenticated={isAuthenticated}
         />
         <ProtectedRoute
-          path={`/users/${userId}/dashboard`}
+          path={`/users/${userId}/dashboard/${travelId}`}
           component={DashboardContainer}
           isAuthenticated={isAuthenticated}
         />
@@ -40,7 +41,8 @@ const AppContainer = ({
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
-  userId: state.auth.userId
+  userId: state.auth.userId,
+  travelId: state.travel.travelId
 });
 
 AppContainer.propTypes = {

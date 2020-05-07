@@ -8,7 +8,7 @@ import {
   REGISTER_SPENDING_FAILED,
   DELETE_SPENDING_PENDING,
   DELETE_SPENDING_SUCCESS,
-  DELETE_SPENDING_FAILED
+  DELETE_SPENDING_FAILED,
 } from '../constants/index';
 
 import { setTokenToHeader, getDefaultLatLng } from '../lib/index';

@@ -10,7 +10,11 @@ import {
   DESELECT_FLIGHT_TICKET,
   SELECT_ACCOMODATION,
   DESELECT_ACCOMODATION,
-  SAVE_TRAVEL_ID
+  SAVE_TRAVEL_ID,
+  GET_TRAVELDATA_PENDING,
+  GET_TRAVELDATA_SUCCESS,
+  GET_TRAVELDATA_FAILED,
+  CHANGE_TRAVELID
 } from '../constants/index';
 
 import { setTokenToHeader, getDayList } from '../lib/index';
@@ -80,4 +84,24 @@ export const deselectAccomodation = dispatch => () => {
 
 export const saveTravelId = dispatch => travelId => {
   dispatch({ type: SAVE_TRAVEL_ID, travelId });
+};
+
+export const getAllTravelData = dispatch => async () => {
+  const token = localStorage.getItem('token');
+  setTokenToHeader(token);
+
+  dispatch({ type: GET_TRAVELDATA_PENDING });
+
+  try {
+    const response = await axios.get(`${process.env.REACT_APP_SERVER_URI}/travel`);
+    const { allTravels } = response.data;
+
+    dispatch({ type: GET_TRAVELDATA_SUCCESS, allTravels });
+  } catch (err) {
+    dispatch({ type: GET_TRAVELDATA_FAILED, error: err.response.data.errorMessage });
+  }
+};
+
+export const changeTravelId = dispatch => travelId => {
+  dispatch({ type: CHANGE_TRAVELID, travelId });
 };

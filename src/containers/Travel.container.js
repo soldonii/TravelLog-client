@@ -1,4 +1,5 @@
 import React, { useState, Fragment } from 'react';
+import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -8,6 +9,7 @@ import Travel from '../components/travel/Travel';
 import Booking from '../components/travel/Booking';
 import PurchaseCandidates from '../components/travel/PurchaseCandidates';
 import Button from '../components/layout/Button';
+import MyTravel from '../components/travel/MyTravel';
 
 import { logout } from '../actions/auth.action';
 import {
@@ -19,12 +21,16 @@ import {
   deselectFlightTicket,
   selectAccomodation,
   deselectAccomodation,
-  saveTravelId
+  saveTravelId,
+  getAllTravelData,
+  changeTravelId
 } from '../actions/travel.action';
 
 import logo from '../assets/images/logo.png';
 
 const TravelContainer = ({
+  match,
+  location,
   history,
   userId,
   isAuthenticated,
@@ -38,6 +44,7 @@ const TravelContainer = ({
   boughtAccomodation,
   travelCountry,
   travelDayList,
+  allTravels,
   logout,
   requestCrawling,
   clearError,
@@ -47,54 +54,71 @@ const TravelContainer = ({
   deselectFlightTicket,
   selectAccomodation,
   deselectAccomodation,
-  saveTravelId
+  saveTravelId,
+  getAllTravelData,
+  changeTravelId
 }) => {
   const [ shouldModalOpen, setShouldModalOpen ] = useState(false);
 
   return (
     <Fragment>
       <Navbar isAuthenticated={isAuthenticated} logo={logo}>
-        {kayakData.length && airbnbData.length ?
+        {location.pathname.includes('travels') &&
+          <Button onClick={() => history.goBack()}>대시보드로</Button>}
+        {kayakData.length && airbnbData.length && !location.pathname.includes('travels') ?
           <Button onClick={() => setShouldModalOpen(true)}>다음</Button> : null}
         <Button onClick={logout}>로그아웃</Button>
       </Navbar>
-      <SlideInModal shouldModalOpen={shouldModalOpen} setShouldModalOpen={setShouldModalOpen}>
-        <PurchaseCandidates
-          history={history}
-          flightStack={flightStack}
-          accomodationStack={accomodationStack}
-          boughtFlight={boughtFlight}
-          boughtAccomodation={boughtAccomodation}
-          selectFlightTicket={selectFlightTicket}
-          deselectFlightTicket={deselectFlightTicket}
-          selectAccomodation={selectAccomodation}
-          deselectAccomodation={deselectAccomodation}
-          travelCountry={travelCountry}
-          travelDayList={travelDayList}
-          saveTravelId={saveTravelId}
-          userId={userId}
-        />
-      </SlideInModal>
-      {kayakData.length || airbnbData.length ?
-        <Booking
-          flights={kayakData}
-          accommodations={airbnbData}
-          addFlightToStack={addFlightToStack}
-          addAccomodationToStack={addAccomodationToStack}
-          boughtFlight={boughtFlight}
-          boughtAccomodation={boughtAccomodation}
-          selectFlightTicket={selectFlightTicket}
-          deselectFlightTicket={deselectFlightTicket}
-          selectAccomodation={selectAccomodation}
-          deselectAccomodation={deselectAccomodation}
-        /> :
-        <Travel
-          requestCrawling={requestCrawling}
-          loading={loading}
-          error={error}
-          clearError={clearError}
-        />
-      }
+      <Switch>
+        <Route path={`${match.path}/travels`}>
+          <MyTravel
+            userId={userId}
+            allTravels={allTravels}
+            getAllTravelData={getAllTravelData}
+            changeTravelId={changeTravelId}
+          />
+        </Route>
+      </Switch>
+        <Route exact path={match.path}>
+          <Fragment>
+            <SlideInModal shouldModalOpen={shouldModalOpen} setShouldModalOpen={setShouldModalOpen}>
+              <PurchaseCandidates
+                history={history}
+                flightStack={flightStack}
+                accomodationStack={accomodationStack}
+                boughtFlight={boughtFlight}
+                boughtAccomodation={boughtAccomodation}
+                selectFlightTicket={selectFlightTicket}
+                deselectFlightTicket={deselectFlightTicket}
+                selectAccomodation={selectAccomodation}
+                deselectAccomodation={deselectAccomodation}
+                travelCountry={travelCountry}
+                travelDayList={travelDayList}
+                saveTravelId={saveTravelId}
+                userId={userId}
+              />
+            </SlideInModal>
+            {kayakData.length || airbnbData.length ?
+              <Booking
+                flights={kayakData}
+                accommodations={airbnbData}
+                addFlightToStack={addFlightToStack}
+                addAccomodationToStack={addAccomodationToStack}
+                boughtFlight={boughtFlight}
+                boughtAccomodation={boughtAccomodation}
+                selectFlightTicket={selectFlightTicket}
+                deselectFlightTicket={deselectFlightTicket}
+                selectAccomodation={selectAccomodation}
+                deselectAccomodation={deselectAccomodation}
+              /> :
+              <Travel
+                requestCrawling={requestCrawling}
+                loading={loading}
+                error={error}
+                clearError={clearError}
+              />}
+            </Fragment>
+        </Route>
     </Fragment>
   );
 };
@@ -139,7 +163,9 @@ const mapStateToProps = state => ({
   flightPrice: state.travel.flightPrice,
   accomodationPrice: state.travel.accomodationPrice,
   travelCountry: state.travel.travelCountry,
-  travelDayList: state.travel.travelDayList
+  travelDayList: state.travel.travelDayList,
+  travelId: state.travel.travelId,
+  allTravels: state.travel.allTravels
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -152,7 +178,9 @@ const mapDispatchToProps = dispatch => ({
   selectAccomodation: selectAccomodation(dispatch),
   deselectAccomodation: deselectAccomodation(dispatch),
   saveTravelId: saveTravelId(dispatch),
-  clearError: clearError(dispatch)
+  clearError: clearError(dispatch),
+  getAllTravelData: getAllTravelData(dispatch),
+  changeTravelId: changeTravelId(dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TravelContainer);

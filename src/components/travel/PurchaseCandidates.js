@@ -78,7 +78,7 @@ const PurchaseCandidates = ({
 
       saveTravelId(travelId);
 
-      if (response.status === 200) history.push(`/users/${userId}/dashboard`);
+      if (response.status === 200) history.push(`/users/${userId}/dashboard/${travelId}`);
     }
   };
 

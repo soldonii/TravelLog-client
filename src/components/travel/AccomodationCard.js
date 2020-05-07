@@ -50,7 +50,7 @@ AccomodationCard.propTypes = {
   title: PropTypes.string.isRequired,
   infoList: PropTypes.array.isRequired,
   price: PropTypes.array.isRequired,
-  link: PropTypes.string.isRequired,
+  link: PropTypes.string,
   mode: PropTypes.string,
   onClick: PropTypes.func.isRequired
 };

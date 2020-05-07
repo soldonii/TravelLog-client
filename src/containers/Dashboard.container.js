@@ -11,9 +11,11 @@ import logo from '../assets/images/logo.png';
 
 import { logout } from '../actions/auth.action';
 import { getDefaultLatLng } from '../lib/index';
-import { getInitialData, registerSpending, deleteSpending } from '../actions/dashboard.actions';
+import { getInitialData, registerSpending, deleteSpending } from '../actions/dashboard.action';
 
 const DashboardContainer = ({
+  history,
+  userId,
   isAuthenticated,
   travelId,
   travelCountry,
@@ -21,7 +23,6 @@ const DashboardContainer = ({
   currencyExchange,
   currencyCode,
   defaultLatLng,
-
   getInitialData,
   registerSpending,
   deleteSpending,
@@ -34,7 +35,7 @@ const DashboardContainer = ({
     getInitialData(travelId);
 
     // eslint-disable-next-line
-  }, []);
+  }, [ travelId ]);
 
   const onSpendingListClick = (day, spendingId) => {
     const targetList = spendingByDates[day].find(list => list.spendingId === spendingId);
@@ -79,8 +80,7 @@ const DashboardContainer = ({
   return (
     <Fragment>
       <Navbar isAuthenticated={isAuthenticated} logo={logo}>
-        {/* <Button onClick={() => history.push('travel/mytravels')}>내 여행</Button> */}
-        {/* <Button>내 여행</Button> */}
+        <Button onClick={() => history.push(`/users/${userId}/travel/travels`)}>내 여행</Button>
         <Button onClick={() => setShouldModalOpen(true)}>지출 등록</Button>
         <Button onClick={logout}>로그아웃</Button>
       </Navbar>

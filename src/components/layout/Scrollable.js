@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Scrollable = ({ children }) => (
-  <Wrapper>
+const Scrollable = ({ style, children }) => (
+  <Wrapper style={style}>
     {children}
   </Wrapper>
 );

@@ -9,7 +9,11 @@ import {
   DESELECT_FLIGHT_TICKET,
   SELECT_ACCOMODATION,
   DESELECT_ACCOMODATION,
-  SAVE_TRAVEL_ID
+  SAVE_TRAVEL_ID,
+  GET_TRAVELDATA_PENDING,
+  GET_TRAVELDATA_SUCCESS,
+  GET_TRAVELDATA_FAILED,
+  CHANGE_TRAVELID
 } from '../constants/index';
 
 const initialState = {
@@ -23,7 +27,8 @@ const initialState = {
   boughtAccomodation: {},
   travelCountry: '',
   travelDayList: [],
-  travelId: ''
+  travelId: '',
+  allTravels: []
 };
 
 const travelReducer = (state = initialState, action) => {
@@ -109,6 +114,31 @@ const travelReducer = (state = initialState, action) => {
         travelId: action.travelId
       };
 
+    case GET_TRAVELDATA_PENDING:
+      return {
+        ...state,
+        loading: true
+      };
+
+    case GET_TRAVELDATA_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        allTravels: action.allTravels
+      };
+
+    case GET_TRAVELDATA_FAILED:
+      return {
+        ...state,
+        loading: false,
+        error: action.error
+      };
+
+    case CHANGE_TRAVELID:
+      return {
+        ...state,
+        travelId: action.travelId
+      };
 
     default:
       return state;
