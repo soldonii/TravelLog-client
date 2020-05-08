@@ -1,0 +1,7 @@
+{
+  "baseUrl": "http://localhost:3000",
+  "testFiles": ["auth.spec.js"],
+  "env": {
+    "serverURI": "http://localhost:8080"
+  }
+}
