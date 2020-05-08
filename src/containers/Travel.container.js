@@ -25,6 +25,7 @@ import {
   getAllTravelData,
   changeTravelId
 } from '../actions/travel.action';
+import { getInitialData } from '../actions/dashboard.action';
 
 import logo from '../assets/images/logo.png';
 
@@ -56,7 +57,8 @@ const TravelContainer = ({
   deselectAccomodation,
   saveTravelId,
   getAllTravelData,
-  changeTravelId
+  changeTravelId,
+  getInitialData
 }) => {
   const [ shouldModalOpen, setShouldModalOpen ] = useState(false);
 
@@ -96,6 +98,7 @@ const TravelContainer = ({
                 travelDayList={travelDayList}
                 saveTravelId={saveTravelId}
                 userId={userId}
+                getInitialData={getInitialData}
               />
             </SlideInModal>
             {kayakData.length || airbnbData.length ?
@@ -180,7 +183,8 @@ const mapDispatchToProps = dispatch => ({
   saveTravelId: saveTravelId(dispatch),
   clearError: clearError(dispatch),
   getAllTravelData: getAllTravelData(dispatch),
-  changeTravelId: changeTravelId(dispatch)
+  changeTravelId: changeTravelId(dispatch),
+  getInitialData: getInitialData(dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TravelContainer);

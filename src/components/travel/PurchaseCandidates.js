@@ -28,7 +28,8 @@ const PurchaseCandidates = ({
   travelCountry,
   travelDayList,
   saveTravelId,
-  userId
+  userId,
+  getInitialData
 }) => {
   const onFlightClick = (e, flight) => {
     if (!Object.keys(boughtFlight).length) {
@@ -67,18 +68,21 @@ const PurchaseCandidates = ({
       const { price: flightPrice } = priceAndProviderWithLinks[0];
       const { price: accomodationPrice } = boughtAccomodation;
 
-      const response = await axios.post(`${process.env.REACT_APP_SERVER_URI}/dashboard`, {
-        flightPrice: parseInt(flightPrice.slice(0, -1).replace(/,/gi, '')),
-        accomodationPrice: parseInt(accomodationPrice.replace(/,/gi, '') * travelDayList.length),
-        travelCountry,
-        travelDayList
-      });
+      try {
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_URI}/dashboard`, {
+          flightPrice: parseInt(flightPrice.slice(0, -1).replace(/,/gi, '')),
+          accomodationPrice: parseInt(accomodationPrice.replace(/,/gi, '') * travelDayList.length),
+          travelCountry,
+          travelDayList
+        });
 
-      const { travelId } = response.data;
+        const { travelId } = response.data;
 
-      saveTravelId(travelId);
-
-      if (response.status === 200) history.push(`/users/${userId}/dashboard/${travelId}`);
+        saveTravelId(travelId);
+        getInitialData(userId, travelId);
+      } catch (err) {
+        console.error(err);
+      }
     }
   };
 

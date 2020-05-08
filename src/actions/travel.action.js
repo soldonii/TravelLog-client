@@ -14,10 +14,16 @@ import {
   GET_TRAVELDATA_PENDING,
   GET_TRAVELDATA_SUCCESS,
   GET_TRAVELDATA_FAILED,
-  CHANGE_TRAVELID
+  CHANGE_TRAVELID,
+  GET_INITIAL_DATA_PENDING,
+  GET_INITIAL_DATA_SUCCESS,
+  GET_INITIAL_DATA_FAILED,
 } from '../constants/index';
 
-import { setTokenToHeader, getDayList } from '../lib/index';
+import { getInitialData } from '../actions/dashboard.action';
+
+import { setTokenToHeader, getDayList, getDefaultLatLng } from '../lib/index';
+import history from '../lib/history';
 
 export const requestCrawling = dispatch => async (country, city, travelDates) => {
   const token = localStorage.getItem('token');
@@ -102,6 +108,38 @@ export const getAllTravelData = dispatch => async () => {
   }
 };
 
-export const changeTravelId = dispatch => travelId => {
-  dispatch({ type: CHANGE_TRAVELID, travelId });
+export const changeTravelId = dispatch => async (travelId, userId) => {
+  const token = localStorage.getItem('token');
+  setTokenToHeader(token);
+
+  try {
+    dispatch({ type: GET_INITIAL_DATA_PENDING });
+
+    dispatch({ type: CHANGE_TRAVELID, travelId })
+
+    const response = await axios.get(`${process.env.REACT_APP_SERVER_URI}/dashboard`, {
+      params: { travelId }
+    });
+
+    const { travelCountry, spendingByDates, currencyExchange, currencyCode } = response.data;
+    const defaultLatLng = getDefaultLatLng(travelCountry);
+
+    dispatch({
+      type: GET_INITIAL_DATA_SUCCESS,
+      travelCountry,
+      spendingByDates,
+      currencyExchange,
+      currencyCode,
+      defaultLatLng
+    });
+
+    history.push(`/users/${userId}/dashboard/${travelId}`);
+  } catch (err) {
+    dispatch({ type: GET_INITIAL_DATA_FAILED, error: err.response.data.errorMessage });
+  }
 };
+
+// 5eb4ddb4ce32e90a740afd02
+
+// http://localhost:3000/users/5ea70ea7721ef11adb778b66/dashboard/5eb509023819b329c225552c
+// http://localhost:3000/users/5ea70ea7721ef11adb778b66/dashboard/5eb4b4d1affed1082cda8d0a

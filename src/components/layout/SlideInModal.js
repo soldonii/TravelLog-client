@@ -23,7 +23,7 @@ const ModalOverlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 2;
 `;
 
 const ModalWrapper = styled.div`
@@ -33,7 +33,7 @@ const ModalWrapper = styled.div`
   top: 0;
   display: ${props => props.open ? 'block' : 'none'};
   right: ${props => props.open ? 0 : '-100%'};
-  z-index: 1;
+  z-index: 2;
   transition: all 0.5s ease-in-out;
   display: flex;
   background: white;

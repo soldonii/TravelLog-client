@@ -14,6 +14,7 @@ const AuthContainer = ({
   isAuthenticated,
   loading,
   error,
+  travelId,
   requestLogin,
 }) => {
   useEffect(() => {
@@ -54,7 +55,8 @@ const mapStateToProps = state => ({
   userId: state.auth.userId,
   isAuthenticated: state.auth.isAuthenticated,
   loading: state.auth.loading,
-  error: state.auth.error
+  error: state.auth.error,
+  travelId: state.travel.travelId
 });
 
 const mapDispatchToProps = dispatch => ({

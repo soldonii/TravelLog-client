@@ -32,7 +32,10 @@ const Dropdown = ({
                 className='link'
                 target='_blank'
                 rel="noopener noreferrer"
-                onClick={() => onItemClick(currentItem, option)}
+                onClick={() => {
+                  setVisibility(false);
+                  onItemClick(currentItem, option);
+                }}
               >
                 <span className='dropdown-price'>{option.price}</span>
                 <span className='dropdown-provider'>{option.provider}</span>

@@ -1,57 +1,6 @@
 [
   {
-    "country": "Australia",
-    "spendingByDates": {
-      "출발 전": [
-        {
-          "category": "항공",
-          "description": "항공권 구매",
-          "amount": 3827778,
-          "location": {
-            "title": "출발 전",
-            "coordinates": {
-              "lat": 37.566536,
-              "lng": 126.977966
-            }
-          },
-          "spendingId": "qsj0mQ"
-        },
-        {
-          "category": "숙박",
-          "description": "에어비앤비 숙소 구매",
-          "amount": 270120,
-          "location": {
-            "title": "출발 전",
-            "coordinates": {
-              "lat": 37.566536,
-              "lng": 126.977966
-            }
-          },
-          "spendingId": "c6VWHX"
-        }
-      ],
-      "2020-05-26(화)": [],
-      "2020-05-27(수)": [],
-      "2020-05-28(목)": [],
-      "2020-05-29(금)": [
-        {
-          "category": "식비",
-          "description": "감자튀김 냠냠",
-          "amount": 23640,
-          "location": {
-            "title": "Burger Point Wentworth Point, Footbridge Boulevard, 웬트워스 포인트 뉴사우스웨일스 주 오스트레일리아",
-            "coordinates": {
-              "lat": -33.8253406,
-              "lng": 151.0786364
-            }
-          },
-          "spendingId": "lZjOru"
-        }
-      ],
-      "2020-05-30(토)": []
-    }
-  },
-  {
+    "_id": 1,
     "country": "Australia",
     "spendingByDates": {
       "출발 전": [
@@ -183,6 +132,194 @@
           "spendingId": "pQG6Wz"
         }
       ]
+    }
+  },
+  {
+    "_id": 2,
+    "country": "Switzerland",
+    "spendingByDates": {
+      "출발 전": [
+        {
+          "category": "항공",
+          "description": "항공권 구매",
+          "amount": 824063,
+          "location": {
+            "title": "출발 전",
+            "coordinates": {
+              "lat": 37.566536,
+              "lng": 126.977966
+            }
+          },
+          "spendingId": "flnFPl"
+        },
+        {
+          "category": "숙박",
+          "description": "에어비앤비 숙소 구매",
+          "amount": 1048861,
+          "location": {
+            "title": "출발 전",
+            "coordinates": {
+              "lat": 37.566536,
+              "lng": 126.977966
+            }
+          },
+          "spendingId": "huvhoZ"
+        }
+      ],
+      "2020-06-23(화)": [
+        {
+          "category": "교통",
+          "description": "스위스 패스 구매",
+          "amount": 487600,
+          "location": {
+            "title": "Interlaken, 스위스",
+            "coordinates": {
+              "lat": 46.6863481,
+              "lng": 7.863204899999999
+            }
+          },
+          "spendingId": "qAKf41"
+        }
+      ],
+      "2020-06-24(수)": [
+        {
+          "category": "식비",
+          "description": "스위스 퐁듀 냠냠",
+          "amount": 36570,
+          "location": {
+            "title": "Spycher, Dorfstrasse, 그린델발트 Interlaken, 스위스",
+            "coordinates": {
+              "lat": 46.6251893,
+              "lng": 8.0294857
+            }
+          },
+          "spendingId": "h006VV"
+        }
+      ],
+      "2020-06-25(목)": [
+        {
+          "category": "쇼핑",
+          "description": "프라이탁 가방 구매",
+          "amount": 365700,
+          "location": {
+            "title": "FREITAG Flagship Store Zürich, Geroldstrasse, 취리히 Switzerland",
+            "coordinates": {
+              "lat": 47.3856744,
+              "lng": 8.5194463
+            }
+          },
+          "spendingId": "192yeg"
+        }
+      ],
+      "2020-06-26(금)": [],
+      "2020-06-27(토)": [
+        {
+          "category": "관광",
+          "description": "체르마트 케이블카 티켓",
+          "amount": 60950,
+          "location": {
+            "title": "Zermatt, 스위스",
+            "coordinates": {
+              "lat": 46.0207133,
+              "lng": 7.749117000000001
+            }
+          },
+          "spendingId": "BC9sbC"
+        }
+      ],
+      "2020-06-28(일)": [],
+      "2020-06-29(월)": [
+        {
+          "category": "식비",
+          "description": "편의점에서 김밥 구매",
+          "amount": 12190,
+          "location": {
+            "title": "Spiez, 스위스",
+            "coordinates": {
+              "lat": 46.6884826,
+              "lng": 7.6791524
+            }
+          },
+          "spendingId": "3KTspl"
+        }
+      ],
+      "2020-06-30(화)": [
+        {
+          "category": "쇼핑",
+          "description": "주변 사람들 기념품 구매",
+          "amount": 60950,
+          "location": {
+            "title": "Basel, 스위스",
+            "coordinates": {
+              "lat": 47.5595986,
+              "lng": 7.5885761
+            }
+          },
+          "spendingId": "FXZMfU"
+        }
+      ],
+      "2020-07-01(수)": [],
+      "2020-07-02(목)": [],
+      "2020-07-03(금)": [
+        {
+          "category": "식비",
+          "description": "마지막 날 남은 돈 털어서 만찬..",
+          "amount": 121900,
+          "location": {
+            "title": "Zürich HB, Bahnhofplatz, 취리히 스위스",
+            "coordinates": {
+              "lat": 47.3778579,
+              "lng": 8.5403226
+            }
+          },
+          "spendingId": "yGGaWA"
+        }
+      ]
+    }
+  },
+  {
+    "_id": 3,
+    "country": "United Kingdom",
+    "spendingByDates": {
+      "출발 전": [
+        {
+          "category": "항공",
+          "description": "항공권 구매",
+          "amount": 933939,
+          "location": {
+            "title": "출발 전",
+            "coordinates": {
+              "lat": 37.566536,
+              "lng": 126.977966
+            }
+          },
+          "spendingId": "QVCZeI"
+        },
+        {
+          "category": "숙박",
+          "description": "에어비앤비 숙소 구매",
+          "amount": 948387,
+          "location": {
+            "title": "출발 전",
+            "coordinates": {
+              "lat": 37.566536,
+              "lng": 126.977966
+            }
+          },
+          "spendingId": "NGXvUL"
+        }
+      ],
+      "2020-06-16(화)": [],
+      "2020-06-17(수)": [],
+      "2020-06-18(목)": [],
+      "2020-06-19(금)": [],
+      "2020-06-20(토)": [],
+      "2020-06-21(일)": [],
+      "2020-06-22(월)": [],
+      "2020-06-23(화)": [],
+      "2020-06-24(수)": [],
+      "2020-06-25(목)": [],
+      "2020-06-26(금)": []
     }
   }
 ]

@@ -12,8 +12,9 @@ import {
 } from '../constants/index';
 
 import { setTokenToHeader, getDefaultLatLng } from '../lib/index';
+import history from '../lib/history';
 
-export const getInitialData = dispatch => async travelId => {
+export const getInitialData = dispatch => async (userId, travelId) => {
   const token = localStorage.getItem('token');
   setTokenToHeader(token);
 
@@ -35,6 +36,8 @@ export const getInitialData = dispatch => async travelId => {
       currencyCode,
       defaultLatLng
     });
+
+    history.push(`/users/${userId}/dashboard/${travelId}`);
   } catch (err) {
     dispatch({ type: GET_INITIAL_DATA_FAILED, error: err.response.data.errorMessage });
   }

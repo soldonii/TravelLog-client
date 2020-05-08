@@ -10,9 +10,9 @@ import countryImage from '../../lib/countryImage';
 
 const scrollableStyle = {
   display: 'flex',
-  justifyContent: 'center',
+  justifyContent: 'flex-start',
   alignItems: 'flex-start',
-  padding: '3rem 5rem',
+  padding: '3rem 13.9rem',
   flexWrap: 'wrap',
   marginTop: '10vh'
 };
@@ -34,8 +34,8 @@ const MyTravel = ({
   }, []);
 
   const onClick = (travelId, userId) => {
-    changeTravelId(travelId);
-    return history.push(`/users/${userId}/dashboard/${travelId}`);
+    changeTravelId(travelId, userId);
+    // return history.push(`/users/${userId}/dashboard/${travelId}`);
   };
 
   return (
