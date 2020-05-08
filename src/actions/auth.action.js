@@ -19,6 +19,7 @@ export const requestLogin = dispatch => async userInfo => {
 
     dispatch({ type: LOGIN_SUCCESS, userId, token, nickname, profileImage });
   } catch (err) {
+    window.alert('로그인에 실패했습니다!');
     dispatch({ type: LOGIN_FAILED, error: err.response.data.errorMessage });
   }
 };
