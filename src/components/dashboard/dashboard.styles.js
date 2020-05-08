@@ -73,7 +73,7 @@ export const Summary = {
     }
   `,
   Description: styled.div`
-    width: calc(100% - 4rem);
+    width: calc(100% - 5rem);
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -11,7 +11,7 @@ const Navbar = ({
   children
 }) => (
   <NavWrapper>
-    <Link to={isAuthenticated ? '/' : '/'}>
+    <Link to={!isAuthenticated && '/'}>
       <img src={logo} alt='logo'/>
     </Link>
     <LinkWrapper>

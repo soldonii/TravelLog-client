@@ -315,19 +315,27 @@ export const TravelCard = {
     width: 30rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     margin: 1rem;
     cursor: pointer;
-    position: relative;
+    background-image: url(${props => props.backgroundImage});
+    background-size: cover;
+    color: white;
+    transition: box-shadow 0.3s;
+
+    &:hover {
+      box-shadow: 4px 4px 4px #3f3f3f;
+    }
 
     h1 {
       font-size: 3rem;
+      margin-bottom: 1rem;
     }
 
     h3 {
-      position: absolute;
-      bottom: 2rem;
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
     }
   `,
 }

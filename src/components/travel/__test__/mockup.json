@@ -1,0 +1,188 @@
+[
+  {
+    "country": "Australia",
+    "spendingByDates": {
+      "출발 전": [
+        {
+          "category": "항공",
+          "description": "항공권 구매",
+          "amount": 3827778,
+          "location": {
+            "title": "출발 전",
+            "coordinates": {
+              "lat": 37.566536,
+              "lng": 126.977966
+            }
+          },
+          "spendingId": "qsj0mQ"
+        },
+        {
+          "category": "숙박",
+          "description": "에어비앤비 숙소 구매",
+          "amount": 270120,
+          "location": {
+            "title": "출발 전",
+            "coordinates": {
+              "lat": 37.566536,
+              "lng": 126.977966
+            }
+          },
+          "spendingId": "c6VWHX"
+        }
+      ],
+      "2020-05-26(화)": [],
+      "2020-05-27(수)": [],
+      "2020-05-28(목)": [],
+      "2020-05-29(금)": [
+        {
+          "category": "식비",
+          "description": "감자튀김 냠냠",
+          "amount": 23640,
+          "location": {
+            "title": "Burger Point Wentworth Point, Footbridge Boulevard, 웬트워스 포인트 뉴사우스웨일스 주 오스트레일리아",
+            "coordinates": {
+              "lat": -33.8253406,
+              "lng": 151.0786364
+            }
+          },
+          "spendingId": "lZjOru"
+        }
+      ],
+      "2020-05-30(토)": []
+    }
+  },
+  {
+    "country": "Australia",
+    "spendingByDates": {
+      "출발 전": [
+        {
+          "category": "항공",
+          "description": "항공권 구매",
+          "amount": 3823800,
+          "location": {
+            "title": "출발 전",
+            "coordinates": {
+              "lat": 37.566536,
+              "lng": 126.977966
+            }
+          },
+          "spendingId": "DRU97Z"
+        },
+        {
+          "category": "숙박",
+          "description": "에어비앤비 숙소 구매",
+          "amount": 268575,
+          "location": {
+            "title": "출발 전",
+            "coordinates": {
+              "lat": 37.566536,
+              "lng": 126.977966
+            }
+          },
+          "spendingId": "VqF3Dz"
+        }
+      ],
+      "2020-05-26(화)": [
+        {
+          "category": "쇼핑",
+          "description": "나이키 한정판 신발 구매",
+          "amount": 237600,
+          "location": {
+            "title": "Nike George St, 조지 스트리트 Sydney 뉴사우스웨일스 주 오스트레일리아",
+            "coordinates": {
+              "lat": -33.8663951,
+              "lng": 151.2070887
+            }
+          },
+          "spendingId": "aro2cj"
+        },
+        {
+          "category": "교통",
+          "description": "공항에서 숙소까지 택시로 이동",
+          "amount": 23760,
+          "location": {
+            "title": "Sydney Airport (SYD), 시드니 시 뉴사우스웨일스 주 오스트레일리아",
+            "coordinates": {
+              "lat": -33.9399228,
+              "lng": 151.1752764
+            }
+          },
+          "spendingId": "GP5Dkt"
+        }
+      ],
+      "2020-05-27(수)": [
+        {
+          "category": "관광",
+          "description": "오페라하우스 입장료",
+          "amount": 39600,
+          "location": {
+            "title": "Sydney Opera House, 시드니 시 뉴사우스웨일스 주 오스트레일리아",
+            "coordinates": {
+              "lat": -33.8567844,
+              "lng": 151.2152967
+            }
+          },
+          "spendingId": "hVAjLP"
+        },
+        {
+          "category": "식비",
+          "description": "편의점에서 식료품 구매",
+          "amount": 15840,
+          "location": {
+            "title": "Seven Eleven, Carrington Street, Sydney 뉴사우스웨일스 주 오스트레일리아",
+            "coordinates": {
+              "lat": -33.8660042,
+              "lng": 151.206474
+            }
+          },
+          "spendingId": "UHrnfi"
+        }
+      ],
+      "2020-05-28(목)": [
+        {
+          "category": "식비",
+          "description": "점심으로 햄버거",
+          "amount": 39600,
+          "location": {
+            "title": "McDonald's Waterloo, 보타니 로드 워털루 뉴사우스웨일스 주 오스트레일리아",
+            "coordinates": {
+              "lat": -33.9017027,
+              "lng": 151.2018507
+            }
+          },
+          "spendingId": "y9kAHd"
+        }
+      ],
+      "2020-05-29(금)": [
+        {
+          "category": "관광",
+          "description": "유람선 티켓",
+          "amount": 79200,
+          "location": {
+            "title": "Darling Harbour, Sydney 뉴사우스웨일스 주 오스트레일리아",
+            "coordinates": {
+              "lat": -33.87488,
+              "lng": 151.2009
+            }
+          },
+          "spendingId": "Zuriv9"
+        }
+      ],
+      "2020-05-30(토)": [
+        {
+          "category": "식비",
+          "description": "마지막 날 칵테일바",
+          "amount": 95040,
+          "location": {
+            "title": "Novotel Sydney Central, Thomas Street, 헤이마켓 뉴사우스웨일스 주 오스트레일리아",
+            "coordinates": {
+              "lat": -33.8818009,
+              "lng": 151.2031076
+            }
+          },
+          "spendingId": "pQG6Wz"
+        }
+      ]
+    }
+  }
+]

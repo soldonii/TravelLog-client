@@ -146,5 +146,3 @@ const travelReducer = (state = initialState, action) => {
 };
 
 export default travelReducer;
-
-

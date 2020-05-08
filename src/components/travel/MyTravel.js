@@ -6,14 +6,19 @@ import Scrollable from '../layout/Scrollable';
 import TravelCard from './TravelCard';
 
 import history from '../../lib/history';
+import countryImage from '../../lib/countryImage';
 
 const scrollableStyle = {
   display: 'flex',
   justifyContent: 'center',
-  alignItems: 'center',
+  alignItems: 'flex-start',
   padding: '3rem 5rem',
   flexWrap: 'wrap',
   marginTop: '10vh'
+};
+
+const defaultLayoutStyle = {
+  alignItems: 'flex-start'
 };
 
 const MyTravel = ({
@@ -34,7 +39,7 @@ const MyTravel = ({
   };
 
   return (
-    <DefaultLayout>
+    <DefaultLayout style={defaultLayoutStyle}>
       <Scrollable style={scrollableStyle}>
         {allTravels.length && allTravels.map(travel => {
           const { _id: travelId, country, spendingByDates } = travel;
@@ -46,16 +51,19 @@ const MyTravel = ({
             if (idx === dateList.length - 1) travelDates.push(date);
           });
 
-          return (<TravelCard
-            key={travelId}
-            data-id={travelId}
-            travelId={travelId}
-            country={country}
-            travelDates={travelDates}
-            spendingByDates={spendingByDates}
-            userId={userId}
-            onClick={onClick}
-          />);
+          return (
+            <TravelCard
+              key={travelId}
+              data-id={travelId}
+              travelId={travelId}
+              country={country}
+              backgroundImage={countryImage[country] ? countryImage[country] : countryImage.Default}
+              travelDates={travelDates}
+              spendingByDates={spendingByDates}
+              userId={userId}
+              onClick={onClick}
+            />
+          );
         })}
       </Scrollable>
     </DefaultLayout>

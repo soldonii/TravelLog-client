@@ -7,15 +7,17 @@ import * as SC from './dashboard.styles';
 import { usePrevious } from '../../lib/index';
 
 let chartRef = createRef();
+let myChart;
 
 const PieChart = ({ spendingByCategory }) => {
   const prevValue = usePrevious(spendingByCategory);
 
   useEffect(() => {
     if (JSON.stringify(prevValue) !== JSON.stringify(spendingByCategory)) {
+      if (myChart) myChart.destroy();
       const myChartRef = chartRef.current.getContext('2d');
 
-      new Chart(myChartRef, {
+      myChart = new Chart(myChartRef, {
         type: 'pie',
         data: {
           labels: Object.keys(spendingByCategory),
