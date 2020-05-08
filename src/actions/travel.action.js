@@ -20,8 +20,6 @@ import {
   GET_INITIAL_DATA_FAILED,
 } from '../constants/index';
 
-import { getInitialData } from '../actions/dashboard.action';
-
 import { setTokenToHeader, getDayList, getDefaultLatLng } from '../lib/index';
 import history from '../lib/history';
 
@@ -138,8 +136,3 @@ export const changeTravelId = dispatch => async (travelId, userId) => {
     dispatch({ type: GET_INITIAL_DATA_FAILED, error: err.response.data.errorMessage });
   }
 };
-
-// 5eb4ddb4ce32e90a740afd02
-
-// http://localhost:3000/users/5ea70ea7721ef11adb778b66/dashboard/5eb509023819b329c225552c
-// http://localhost:3000/users/5ea70ea7721ef11adb778b66/dashboard/5eb4b4d1affed1082cda8d0a

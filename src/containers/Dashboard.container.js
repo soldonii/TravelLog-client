@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import Navbar from '../components/layout/Navbar';
@@ -30,11 +30,6 @@ const DashboardContainer = ({
 }) => {
   const [ shouldModalOpen, setShouldModalOpen ] = useState(false);
   const [ chosenSpending, setChosenSpending ] = useState({});
-
-  // useEffect(() => {
-  //   getInitialData(travelId);
-  //   // eslint-disable-next-line
-  // }, [ travelId ]);
 
   const onSpendingListClick = (day, spendingId) => {
     const targetList = spendingByDates[day].find(list => list.spendingId === spendingId);

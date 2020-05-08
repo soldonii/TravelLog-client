@@ -6,6 +6,7 @@ import PieChart from './PieChart';
 import Summary from './Summary';
 import Map from './Map';
 
+import emojis from '../../lib/countryEmojis.json';
 import * as SC from './dashboard.styles';
 
 const Dashboard = ({
@@ -17,6 +18,12 @@ const Dashboard = ({
 }) => (
   <DefaultLayout>
     <SC.Dashboard.Wrapper>
+      <h1 className='travel-country'>
+        {emojis.filter(item => item.name === travelCountry)[0] ?
+          emojis.filter(item => item.name === travelCountry)[0].emoji : null}
+        {' '}
+        {travelCountry}
+      </h1>
       <PieChart spendingByCategory={spendingByCategory} />
     </SC.Dashboard.Wrapper>
     <SC.Dashboard.Wrapper>

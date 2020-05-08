@@ -66,7 +66,7 @@ const TravelContainer = ({
     <Fragment>
       <Navbar isAuthenticated={isAuthenticated} logo={logo}>
         {location.pathname.includes('travels') &&
-          <Button onClick={() => history.goBack()}>대시보드로</Button>}
+          <Button onClick={() => history.goBack()}>대시보드</Button>}
         {kayakData.length && airbnbData.length && !location.pathname.includes('travels') ?
           <Button onClick={() => setShouldModalOpen(true)}>다음</Button> : null}
         <Button onClick={logout}>로그아웃</Button>

@@ -12,6 +12,14 @@ export const Dashboard = {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
+
+    .travel-country {
+      font-size: 3rem;
+      position: absolute;
+      top: 2rem;
+      left: 1rem;
+    }
   `
 };
 

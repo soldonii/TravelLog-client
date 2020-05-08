@@ -5,7 +5,6 @@ import Scrollable from '../layout/Scrollable';
 
 import TravelCard from './TravelCard';
 
-import history from '../../lib/history';
 import countryImage from '../../lib/countryImage';
 
 const scrollableStyle = {
@@ -33,11 +32,6 @@ const MyTravel = ({
     // eslint-disable-next-line
   }, []);
 
-  const onClick = (travelId, userId) => {
-    changeTravelId(travelId, userId);
-    // return history.push(`/users/${userId}/dashboard/${travelId}`);
-  };
-
   return (
     <DefaultLayout style={defaultLayoutStyle}>
       <Scrollable style={scrollableStyle}>
@@ -61,7 +55,7 @@ const MyTravel = ({
               travelDates={travelDates}
               spendingByDates={spendingByDates}
               userId={userId}
-              onClick={onClick}
+              onClick={() => changeTravelId(travelId, userId)}
             />
           );
         })}
