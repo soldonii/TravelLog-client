@@ -1,68 +1,137 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![cover](./readmeAssets/cover.png)
 
-## Available Scripts
+# TravelLog
 
-In the project directory, you can run:
+## 1. Introduction
+평소 여행을 다닐 때마다 여행 관련된 모든 지출을 기록하고, 한 눈에 파악할 수 있는 서비스가 없어 불편함을 느꼈습니다.
+**TravelLog**는 이러한 불편을 해소하기 위해 항공권, 숙소 및 여행지에서의 지출 내용을 기록하고 한 눈에 확인할 수 있도록 제작됩 웹 어플리케이션입니다.
 
-### `yarn start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 2. Preview
+- https://www.travellog.live
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
-### `yarn test`
+![TravelLog Preview](./readmeAssets/travellog.gif)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+## 3. Features
+- KakaoTalk Social Login
+- Kayak.com Crawling
+- Airbnb Crawling
+- Chart.js를 이용한 지출 시각화
+- Google Maps API를 이용한 지출 장소 지도 표시
+- 다수의 여행지 지출 내역 저장/불러오기 기능
+- 지출 내역 등록/수정/삭제 기능
+- Currency API를 이용, 환율을 적용하여 지출액을 한화로 자동 변환 기능
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## 4. Requirements
+- 최신 Chrome Browser의 사용을 권장합니다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
+## 5. Prerequisites
+### Client
+`.env` 파일을 생성하고 아래 `<>`에 환경변수를 입력한 후, root 디렉토리에 저장해야 합니다.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+REACT_APP_KAKAO_KEY=<kakao key>
+REACT_APP_SERVER_URI=https://travellog-server.herokuapp.com
+REACT_APP_GOOGLE_MAP_URL=https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=
+REACT_APP_GOOGLE_API_KEY=<google map api key>
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Server
+`.env` 파일을 생성하고 아래 `<>`에 환경변수를 입력한 후, root 디렉토리에 저장해야 합니다.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```
+PORT=8080
+AIRBNB_SEARCH_URI_FRONT=https://airbnb.co.kr/s/
+AIRBNB_SEARCH_URI_MID=/homes?tab_id=all_tab&refinement_paths%5B%5D=%2Fhomes&
+AIRBNB_SEARCH_URI_BACK=&adults=1&source=structured_search_input_header&search_type=search_query
+KAYAK_URI_FRONT=https://kayak.co.kr/flights/ICN-
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+CURRENCY_API_ENDPOINT=http://api.currencylayer.com/live?access_key=<access-key>
 
-## Learn More
+JWT_SECRET_KEY=<jwt-secret-key>
+MONGODB_URI=<mongoDB-connection-string>
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 6. Installation
+### Client
+```
+git clone https://github.com/soldonii/TravelLog-client.git
+cd TravelLog-client
 
-### Code Splitting
+## 위에서 생성한 .env 파일을 root 디렉토리에 추가합니다.
+npm install
+npm start
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+### Server
+```
+git clone https://github.com/soldonii/TravelLog-server.git
+cd TravelLog-server
 
-### Analyzing the Bundle Size
+## 위에서 생성한 .env 파일을 root 디렉토리에 추가합니다.
+npm install
+npm start
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
 
-### Making a Progressive Web App
+## 7. Skills
+### 1) Client
+- ES2015+
+- React
+- React Router
+- Redux
+- Redux Persist
+- KakaoTalk Social Login
+- Google Maps API
+- Chart.js
+- Styled-Components
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+### 2) Server
+- ES2015+
+- TypeScript
+- Puppeteer
+- Node.js
+- Express
+- MongoDB Atlas
+- Mongoose
+- JSON Web Token
 
-### Advanced Configuration
+### 3) Tests
+- Jest, Enzyme을 이용한 Unit test 작성
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
-### Deployment
+## 8. Project Control
+- Version Control: Git, Gitlab
+- Task Control: Trello
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
 
-### `yarn build` fails to minify
+## 9. Deployment
+- Client: Netlify(https://www.travellog.live)
+- Server: Heroku(https://travellog-server.herokuapp.com)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+## 10. Challenges
+2주 간 본 프로젝트를 진행하면서 겪었던 기술적 어려움들은 아래와 같습니다.
+
+### 1) TypeScript 적용하기
+바닐라코딩 부트캠프 기간 동안 매주 여러 어플리케이션들을 제작했지만, 크고 작은 에러들은 항상 존재했습니다. 에러를 줄이기 위해서 견고한 로직으로 코드를 작성하는 것은 당연하겠지만, TypeScript를 도입해서 타입을 정확히 지정해주면 실제 배포 환경에서 에러를 더 많이 줄일 수 있지 않을까 생각만 해 왔습니다. 본 프로젝트에서 그 동안의 생각을 실천으로 옮기고 싶었고, 2주라는 제한된 개발 시간과 TypeScript를 한 번도 학습해본 적이 없다는 점을 감안하여 프론트엔드와 백엔드 중 한 곳에만 우선적으로 TypeScript를 적용하기로 결정했습니다.
+
+상대적으로 error handling의 중요성이 더 높은 백엔드에 TypeScript를 적용하여 개발을 진행했는데, TypeScript의 사용법, compile option, type을 지정하고 interface를 작성하는 방법 등을 익히면서 개발하다보니 TypeScript를 적용하지 않을 때에 비해 동일한 작업도 서너배의 시간이 걸리곤 했습니다. TypeScript가 발생시키는 무수한 에러들을 해결하는 과정도 쉽지는 않았습니다. 하지만 제한된 기간으로 인해 심리적 여유가 없는 상황에서 TypeScript는 마치 모래주머니를 달고 달리는 것 같은 부담으로 다가왔고, 이로 인한 심리적인 부담감을 이겨내는 것 또한 본 프로젝트의 큰 challenge였습니다.
+
+TypeScript를 정확하게, 높은 수준으로 사용했다고 자신하기는 어렵지만 이번 경험을 토대로 TypeScript의 기초적인 활용 방법을 익힐 수 있었고, 추가적으로 학습하면서 TypeScript를 활용한 개발에 한 발 더 다가갈 수 있는 기반을 다질 수 있는 좋은 경험이었습니다.
+
+### 2) Puppeteer를 이용한 Crawling
+TypeScript와 더불어 Crawling 또한 처음으로 적용해보는 기술 중 하나였습니다. Crawling 자체가 어렵진 않았지만, 웹사이트에서 bot 인식 여부에 대한 가설 검증 없이 진행했던 부분이 아쉬웠습니다. 회사에서는 가설을 세우고 pre 검증을 통해 실현 가능성 여부를 빠르게 판단한 후 진행하는데, 해당 과정 없이 skyscanner를 crawling하기 위해 로직을 모두 세팅해 놓았다가, puppeteer를 이용한 사이트 접속 시 bot으로 인식하여 reCAPTCHA 이슈를 해결해야 하는 난관에 봉착했습니다. 무작위로 신호등, 버스 등이 등장한 사진을 골라야 하는 reCAPTCHA 이슈를 해결하기는 기술적 난이도가 높다고 판단, 결국 skyscanner가 아닌 kayak으로 항공권 crawling 대상 site를 변경하는 과정에서 꽤 많은 시간이 낭비 되었습니다.
+
+이번 경험을 토대로 다시 한 번 pre 검증의 중요성에 대해서 체감하게 되었고, 추후에는 특정 업무를 진행하기 위한 논리를 완벽하게 세우기 전에, 실현 가능성에 대해서 빠르게 검토한 후 진행하여 업무의 진행 속도를 올릴 수 있을 것 같습니다.
+
+
+## 11. Things to do
+- crawling 로직 update : 현재 crawling 로직은 하나의 selector를 찾고 해당 정보를 긁어오는 과정의 반복으로 이루어져 있습니다. 하지만 각 비동기 작업이 서로에게 영향을 미치지 않는 독립적인 작업임에도 불구하고, 하나의 비동기 작업이 완료된 후에야 다른 비동기 작업이 수행되는 현재의 로직이 비효율적임을 프로젝트의 후반부에 깨닫게 되었습니다. 따라서 독립적인 여러 비동기 작업들을 `Promise.all`로 묶어 동시에 진행되도록 로직을 수정하면 crawling에 소요되는 시간을 상당히 줄일 수 있을 것으로 예상되어 해당 로직의 update를 진행하고자 합니다.
+
+- React Component 수정 : 일부 React Container에 과다하게 많은 props가 전달되고 있어, 이를 분산시켜 더 간결한 Container로의 update가 필요합니다.
